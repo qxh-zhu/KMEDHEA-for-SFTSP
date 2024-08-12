@@ -6,20 +6,20 @@ interface
     Dialogs, StdCtrls, math, TeEngine, Series, ExtCtrls, TeeProcs, Chart;
 
 const
-     max_i = 123 ;                              //¹¤ĞòÊı
-     initially_generated_individuals = 100 ;    //³õÊ¼Éú³ÉµÄ¸öÌåÊıÁ¿
-     hls_popsize = 30 ;                         //¸ß²ã²Ù×÷ÖÖÈº´óĞ¡
-     hls_length = 10 ;                          //¸ß²ã²Ù×÷Ğò³¤¶È   Ò²ÊÇ¸ß²ãÖÖÈºÈ¡ÓÅÊıÁ¿
-     MC_length = hls_length - 1 ;               //¸ß²ãĞòÁĞÊı-1Îª¾ØÕó³¤
-     MC_width_and_hight = 8 ;                   //¾ØÕó¿íºÍ¸ß
-     r = 0.4 ;                                 //Ñ§Ï°ÂÊ
+     max_i = 123 ;                              //å·¥åºæ•°
+     initially_generated_individuals = 100 ;    //åˆå§‹ç”Ÿæˆçš„ä¸ªä½“æ•°é‡
+     hls_popsize = 30 ;                         //é«˜å±‚æ“ä½œç§ç¾¤å¤§å°
+     hls_length = 10 ;                          //é«˜å±‚æ“ä½œåºé•¿åº¦   ä¹Ÿæ˜¯é«˜å±‚ç§ç¾¤å–ä¼˜æ•°é‡
+     MC_length = hls_length - 1 ;               //é«˜å±‚åºåˆ—æ•°-1ä¸ºçŸ©é˜µé•¿
+     MC_width_and_hight = 8 ;                   //çŸ©é˜µå®½å’Œé«˜
+     r = 0.4 ;                                 //å­¦ä¹ ç‡
 
-     QHH_OP = 8 ;                               //QHHµÍ²ãËã×ÓÊıÁ¿
+     QHH_OP = 8 ;                               //QHHä½å±‚ç®—å­æ•°é‡
 
 type
-      arr = array [ 1 .. MAX_i ] of Integer ;   //arr£º³¤¶ÈÎª×Ü¹¤ĞòÊıµÄÊı×é
+      arr = array [ 1 .. MAX_i ] of Integer ;   //arrï¼šé•¿åº¦ä¸ºæ€»å·¥åºæ•°çš„æ•°ç»„
       arrs = array [ 1 .. 100 ] of Integer ;
-      arr_loop = array [ 1 .. 36 ] of Integer ; //loop:ÓÃÀ´×ª»¯Ç°²å½âÂëºó¸ÊÌØÍ¼
+      arr_loop = array [ 1 .. 36 ] of Integer ; //loop:ç”¨æ¥è½¬åŒ–å‰æ’è§£ç åç”˜ç‰¹å›¾
       S_arr = array [ 1 .. 3 ] of Integer ;
       two_arr1 = array [ 1 .. 36 ] of array [ 1 .. 36 ] of Integer ;
       two_arr2 = array [ 1 .. 100 ] of array [ 1 .. 3 ] of Integer ;
@@ -27,61 +27,61 @@ type
       two_arr4 = array [ 1 .. 36 ] of array [ 1 .. 3 ] of Integer ;
       three_arr1 = array [ 1 .. 36 ] of array [ 1 .. 36 ] of array [ 1 .. 2 ] of Integer ;
       three_arr = array [ 1 .. 100 ] of array [ 1 .. 3 ] of array [ 1 .. 3 ] of Integer ;
-      psum_arr = array [ 1 .. MC_width_and_hight ] of Real ;    //¸ÅÂÊÀÛ¼ÆÊıÁĞ
+      psum_arr = array [ 1 .. MC_width_and_hight ] of Real ;    //æ¦‚ç‡ç´¯è®¡æ•°åˆ—
 
 type  pro_pos = array [ 1 .. 36 ] of two_arr3 ;
 
-type Indiv1 = record              //Indiv1 £º ¹¤ĞòĞò £» »úÆ÷Ğò £» ¼Ó¹¤Ê±¼äĞò
+type Indiv1 = record              //Indiv1 ï¼š å·¥åºåº ï¼› æœºå™¨åº ï¼› åŠ å·¥æ—¶é—´åº
               op_arr : arr ;
               ma_arr : arr ;
               pr_arr : arr ;
               end  ;
 
-type SBZM = record                                        // SBZM£º
-           pri_op : array [ 1.. max_i ] of integer ;      { Ô­¹¤Ğò }
-           op : array [ 1.. max_i ] of integer ;          { ¾­¹ı¹æÔòÉú³ÉµÄ¹¤Ğò¡¯ }
-           ma : array [ 1.. max_i ] of integer ;          { ÏàÆ¥ÅäµÄ»úÆ÷Ğò¡¯ }
-           fitness : Double ;                             { Íê¹¤Ê±¼ä }
+type SBZM = record                                        // SBZMï¼š
+           pri_op : array [ 1.. max_i ] of integer ;      { åŸå·¥åº }
+           op : array [ 1.. max_i ] of integer ;          { ç»è¿‡è§„åˆ™ç”Ÿæˆçš„å·¥åºâ€™ }
+           ma : array [ 1.. max_i ] of integer ;          { ç›¸åŒ¹é…çš„æœºå™¨åºâ€™ }
+           fitness : Double ;                             { å®Œå·¥æ—¶é—´ }
            end ;
 
-type hls_indiv = record                                    //¸ß²ã¸öÌå
-           arr : array [ 1.. hls_length ] of integer ;     { Ò»¸ö¸öËã×Ó }
-           evalue : double ;                              { ÆÀ¼ÛÖµ=Ô­Íê¹¤Ê±¼ä-²Ù×÷ÆÚ¼ä×îºÃÍê¹¤Ê±¼ä }
+type hls_indiv = record                                    //é«˜å±‚ä¸ªä½“
+           arr : array [ 1.. hls_length ] of integer ;     { ä¸€ä¸ªä¸ªç®—å­ }
+           evalue : double ;                              { è¯„ä»·å€¼=åŸå®Œå·¥æ—¶é—´-æ“ä½œæœŸé—´æœ€å¥½å®Œå·¥æ—¶é—´ }
            end ;
 
-type hls_record = record                                   // ÆÀ¼Û¸ß²ã¸öÌåÊ±Ê¹ÓÃ
-           arr : array [ 1.. hls_length ] of integer ;     { Ò»¸ö¸öËã×Ó }
+type hls_record = record                                   // è¯„ä»·é«˜å±‚ä¸ªä½“æ—¶ä½¿ç”¨
+           arr : array [ 1.. hls_length ] of integer ;     { ä¸€ä¸ªä¸ªç®—å­ }
            op : array [ 1.. max_i ] of integer ;
            eva : double ;
            end ;
 
-type gant_tu = record                                    //¸ÊÌØÍ¼ĞèÒª¼ÇÂ¼µÄÊı¾İ £º
-           start : arr ;                                 //Ã¿¸ö¹¤Ğò¿éµÄ¿ªÊ¼¼Ó¹¤Ê±¼ä
-           dura : arr ;                                  //Ã¿¸ö¹¤Ğò¿éµÄ¼Ó¹¤Ê±¼ä
-           macInfo : arr ;                               //Ã¿¸ö¹¤Ğò¿éµÄ¹¤¼şºÅ
-           jobid : arr ;                                 //Ã¿¸ö¹¤Ğò¿éµÄ¹¤ĞòºÅ
+type gant_tu = record                                    //ç”˜ç‰¹å›¾éœ€è¦è®°å½•çš„æ•°æ® ï¼š
+           start : arr ;                                 //æ¯ä¸ªå·¥åºå—çš„å¼€å§‹åŠ å·¥æ—¶é—´
+           dura : arr ;                                  //æ¯ä¸ªå·¥åºå—çš„åŠ å·¥æ—¶é—´
+           macInfo : arr ;                               //æ¯ä¸ªå·¥åºå—çš„å·¥ä»¶å·
+           jobid : arr ;                                 //æ¯ä¸ªå·¥åºå—çš„å·¥åºå·
            oper : arr ;
            end ;
 
-type double_arr = array [ 1 .. hls_popsize ] of double ; //¸ø¸ß²ã¸öÌå¸³ÖµµÄĞòÁĞ
+type double_arr = array [ 1 .. hls_popsize ] of double ; //ç»™é«˜å±‚ä¸ªä½“èµ‹å€¼çš„åºåˆ—
 
-type SBZM_pop1 = array [ 1 .. initially_generated_individuals ] of SBZM ;             //³õÊ¼Éú³Éx¸öÌå
+type SBZM_pop1 = array [ 1 .. initially_generated_individuals ] of SBZM ;             //åˆå§‹ç”Ÿæˆxä¸ªä½“
 
-type hls_indiv_pop = array [ 1 .. hls_popsize ] of hls_indiv ;     //¸ß²ã²Ù×÷ĞòÖÖÈº
+type hls_indiv_pop = array [ 1 .. hls_popsize ] of hls_indiv ;     //é«˜å±‚æ“ä½œåºç§ç¾¤
 
-type hls_indiv_contrast_pop = array [ 1 .. hls_popsize + hls_length ] of hls_indiv ;     //¸ß²ã²Ù×÷ĞòÖÖÈº
+type hls_indiv_contrast_pop = array [ 1 .. hls_popsize + hls_length ] of hls_indiv ;     //é«˜å±‚æ“ä½œåºç§ç¾¤
 
-type hls_record_pop = array [ 1 .. hls_length ] of hls_record ;    //¸ß²ã¶Ôµ×²ã½øĞĞ²Ù×÷Ê±£¬¼ÇÂ¼¸ß²ã¸öÌåÒ»¸öÒ»¸öËã×ÓµÄÆÀ¼ÛÖµ
+type hls_record_pop = array [ 1 .. hls_length ] of hls_record ;    //é«˜å±‚å¯¹åº•å±‚è¿›è¡Œæ“ä½œæ—¶ï¼Œè®°å½•é«˜å±‚ä¸ªä½“ä¸€ä¸ªä¸€ä¸ªç®—å­çš„è¯„ä»·å€¼
 
-type real_three_arr = array [ 1 .. MC_length ] of array [ 1 .. MC_width_and_hight ] of array [ 1 .. MC_width_and_hight ] of real ;  //ÏàËÆ¿éÓë¸ÅÂÊ¾ØÕó
+type real_three_arr = array [ 1 .. MC_length ] of array [ 1 .. MC_width_and_hight ] of array [ 1 .. MC_width_and_hight ] of real ;  //ç›¸ä¼¼å—ä¸æ¦‚ç‡çŸ©é˜µ
 
 
 
 type arr_max = array [ 1 .. 50000 ] of Double ;
 
-/////////////////EDAµÄ±äÁ¿¶¨Òå////////////////////////////////////////
+/////////////////EDAçš„å˜é‡å®šä¹‰////////////////////////////////////////
 
-type real_two_arr = array [ 1 .. hls_length ] of array [ 1 .. MC_width_and_hight ] of  real ;  //EDA¸ÅÂÊ¾ØÕó
+type real_two_arr = array [ 1 .. hls_length ] of array [ 1 .. MC_width_and_hight ] of  real ;  //EDAæ¦‚ç‡çŸ©é˜µ
 
 /////////////////////////////////////////////////////////////////////
 
@@ -109,22 +109,22 @@ type real_two_arr = array [ 1 .. hls_length ] of array [ 1 .. MC_width_and_hight
 
 
 var
-  litera_num : Integer ;           //µü´ú´úÊı
-  best_fitness_arr : arr_max ;    //Ã¿Ò»´ú×îÓÅ¼Ó¹¤Ê±¼ä¼ÇÂ¼
+  litera_num : Integer ;           //è¿­ä»£ä»£æ•°
+  best_fitness_arr : arr_max ;    //æ¯ä¸€ä»£æœ€ä¼˜åŠ å·¥æ—¶é—´è®°å½•
 
   canshu_arr : array [ 1 .. 30 ] of Double ;
 
   SBZM_pop , ini_eva_pop ,  pre_pop : SBZM_pop1 ;
 
-  hls_contrast_pop , hls_pop : hls_indiv_contrast_pop ;    // hls_pop £ºÏàËÆ¿é¾ØÕó¶ÔÆä½øĞĞ²ÉÑù
-                                                           // hls_contrast_pop £ºÃ¿Éú³ÉÒ»´úĞÂ¸ß²ãÖÖÈº£¬ÔÚhls_contrast_popÄÚ½øĞĞÅÅĞòÑ°ÓÅ
+  hls_contrast_pop , hls_pop : hls_indiv_contrast_pop ;    // hls_pop ï¼šç›¸ä¼¼å—çŸ©é˜µå¯¹å…¶è¿›è¡Œé‡‡æ ·
+                                                           // hls_contrast_pop ï¼šæ¯ç”Ÿæˆä¸€ä»£æ–°é«˜å±‚ç§ç¾¤ï¼Œåœ¨hls_contrast_popå†…è¿›è¡Œæ’åºå¯»ä¼˜
 
-  best_contrast_ind ,pai0 : SBZM ;     //pai0:³õ´ú×îÓÅ£¬¶ÔÆä½øĞĞÒ»´ú´ú¸ÄÉÆ
-                                       //best_contrast_ind £ºÃ¿´ú¸ÄÉÆÍêµÄÊÊÅäÖµ
+  best_contrast_ind ,pai0 : SBZM ;     //pai0:åˆä»£æœ€ä¼˜ï¼Œå¯¹å…¶è¿›è¡Œä¸€ä»£ä»£æ”¹å–„
+                                       //best_contrast_ind ï¼šæ¯ä»£æ”¹å–„å®Œçš„é€‚é…å€¼
 
-  count_xu , start_time , dura_time : arr ;   //¸ÊÌØÍ¼ËùĞèÊı¾İ
+  count_xu , start_time , dura_time : arr ;   //ç”˜ç‰¹å›¾æ‰€éœ€æ•°æ®
 
-  /////////////////»úÆ÷×ÊÔ´Í¼ËùĞèÊı¾İ///////////////////////////////////////////
+  /////////////////æœºå™¨èµ„æºå›¾æ‰€éœ€æ•°æ®///////////////////////////////////////////
 
   Tester_matrix , handler_matrix : array [ 1 .. 4 ] of array [ 1 .. 240 ] of  integer ;
 
@@ -134,12 +134,12 @@ var
 
   ////////////////////////////////////////////////////////////////////////////////
 
-  Pro_model_MC : real_three_arr  ;     //¸ÅÂÊÄ£ĞÍ¾ØÕóÁ¢·½Ìå
-  similar_blocks_MC : real_three_arr ;  //ÏàËÆ¿é¾ØÕóÁ¢·½Ìå
+  Pro_model_MC : real_three_arr  ;     //æ¦‚ç‡æ¨¡å‹çŸ©é˜µç«‹æ–¹ä½“
+  similar_blocks_MC : real_three_arr ;  //ç›¸ä¼¼å—çŸ©é˜µç«‹æ–¹ä½“
 
-  point_value : real ;                 //¸ÅÂÊÖ¸Õë
+  point_value : real ;                 //æ¦‚ç‡æŒ‡é’ˆ
 
-  //////////////////EDA±äÁ¿¶¨Òå/////////////////////////////////
+  //////////////////EDAå˜é‡å®šä¹‰/////////////////////////////////
 
   EDA_MC : real_two_arr ;
 
@@ -149,7 +149,7 @@ var
 
 
 
-  /////////////////QHH±äÁ¿¶¨Òå/////////////////////////////////
+  /////////////////QHHå˜é‡å®šä¹‰/////////////////////////////////
 
   QHH_state , QHH_action , QHH_G , QHH_gcur , QHH_E , QHH_EP : Integer ;
 
@@ -170,7 +170,7 @@ implementation
 
 procedure calc_fitness ( temp_o_arr , temp_test1 , temp_hand1 , temp_accessory1 : arr ;
                                                           temp_source1_match : two_arr4 ;
-                                                            temp_setup1_time : two_arr1 ;      //»úÆ÷ĞòÁĞÑ°ÓÅ
+                                                            temp_setup1_time : two_arr1 ;      //æœºå™¨åºåˆ—å¯»ä¼˜
                                             temp_M_mt_arr1 , temp_P_mt_arr1 : three_arr ;
                                                                    var  o11_arr : arr ;
                                                                    var  m11_arr : arr ;
@@ -212,15 +212,15 @@ var
 
 begin
 
-  fillchar ( job_count_arr , sizeof ( arr ) , 0 ) ;     //¼ÇÂ¼¹¤Ğò
+  fillchar ( job_count_arr , sizeof ( arr ) , 0 ) ;     //è®°å½•å·¥åº
 
-  fillchar ( job_M , sizeof ( two_arr2 ) , 0 ) ;        //¼ÇÂ¼¹¤¼şÔÚÄÄÌ¨»úÆ÷¼Ó¹¤
+  fillchar ( job_M , sizeof ( two_arr2 ) , 0 ) ;        //è®°å½•å·¥ä»¶åœ¨å“ªå°æœºå™¨åŠ å·¥
 
-  fillchar ( job_Ctime , sizeof ( three_arr ) , 0 ) ;   //¼ÇÂ¼Ã¿¸ö¹¤ĞòµÄ¿ªÊ¼Íê¹¤Ê±¼ä
+  fillchar ( job_Ctime , sizeof ( three_arr ) , 0 ) ;   //è®°å½•æ¯ä¸ªå·¥åºçš„å¼€å§‹å®Œå·¥æ—¶é—´
 
   fillchar ( gant_MT , sizeof ( three_arr1 ) , 0 ) ;
 
-  fillchar ( gant_MT_pos , sizeof ( two_arr1 ) , 0 ) ;        //  ÓÃÀ´×ª»¯Ç°²å½âÂëºó¸ÊÌØÍ¼
+  fillchar ( gant_MT_pos , sizeof ( two_arr1 ) , 0 ) ;        //  ç”¨æ¥è½¬åŒ–å‰æ’è§£ç åç”˜ç‰¹å›¾
 
   fillchar ( gant_MT1_pos , sizeof ( two_arr1 ) , 0 ) ;
 
@@ -229,7 +229,7 @@ begin
   begin
 
     fillchar ( machine_pro_pos [ i ] , sizeof ( two_arr3 ) , 0 ) ;
-                                                                          //machine_pro_pos£º¼ÇÂ¼»úÆ÷ÉÏÃ¿¸öÎ»ÖÃµÄ¿ªÊ¼½áÊøÊ±¼ä
+                                                                          //machine_pro_posï¼šè®°å½•æœºå™¨ä¸Šæ¯ä¸ªä½ç½®çš„å¼€å§‹ç»“æŸæ—¶é—´
     fillchar ( machine_pro_pos1 [ i ] , sizeof ( two_arr3 ) , 0 ) ;
 
 
@@ -241,15 +241,15 @@ begin
 
     job_count_arr [ temp_o_arr [ i ] ] := job_count_arr [ temp_o_arr [ i ] ] + 1 ;
 
-    fillchar ( EC_arr , sizeof ( S_arr ) , 0 ) ;                        //EC: ÓĞÇ°²å¿Õ¼äÊ±£¬¹¤Ğò¿ÉÑ¡ÔñµÄ»úÆ÷¼¯ £¬´ÓÖĞÌôÑ¡Ç°²å¿Õ¼ä×îĞ¡µÄ»úÆ÷
+    fillchar ( EC_arr , sizeof ( S_arr ) , 0 ) ;                        //EC: æœ‰å‰æ’ç©ºé—´æ—¶ï¼Œå·¥åºå¯é€‰æ‹©çš„æœºå™¨é›† ï¼Œä»ä¸­æŒ‘é€‰å‰æ’ç©ºé—´æœ€å°çš„æœºå™¨
 
-    fillchar ( FC_arr , sizeof ( S_arr ) , 0 ) ;                        //FC : ÎŞÇ°²å»úÆ÷¿ÉÑ¡Ê±£¬ÌôÑ¡¼Ó¹¤Íê³ÉÊ±¼ä×î¶ÌµÄ»úÆ÷
+    fillchar ( FC_arr , sizeof ( S_arr ) , 0 ) ;                        //FC : æ— å‰æ’æœºå™¨å¯é€‰æ—¶ï¼ŒæŒ‘é€‰åŠ å·¥å®Œæˆæ—¶é—´æœ€çŸ­çš„æœºå™¨
 
     insert_flag := False;
 
     op_flag := False;
 
-    if job_count_arr [ temp_o_arr [ i ] ] = 1 then                              //Èç¹ûÊÇ¹¤¼şµÄµÚÒ»¸ö¹¤Ğò
+    if job_count_arr [ temp_o_arr [ i ] ] = 1 then                              //å¦‚æœæ˜¯å·¥ä»¶çš„ç¬¬ä¸€ä¸ªå·¥åº
 
     begin
 
@@ -261,20 +261,20 @@ begin
 
         repeat
 
-          if k = 1 then                                                         //ÂÖµ½ÕÒ»úÆ÷µÚÒ»¸ö¹¤ĞòÇ°ÓĞÃ»ÓĞ¿Õ
+          if k = 1 then                                                         //è½®åˆ°æ‰¾æœºå™¨ç¬¬ä¸€ä¸ªå·¥åºå‰æœ‰æ²¡æœ‰ç©º
 
           begin
 
             if  temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ]
-                <= machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]   //Èç¹ûÓĞÇ°²å¿Õ¼ä
+                <= machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]   //å¦‚æœæœ‰å‰æ’ç©ºé—´
 
             then
 
             begin
 
-              insert_flag := True ;                                             //¢Ù¸Ä±äÇ°²å±êÊ¶
+              insert_flag := True ;                                             //â‘ æ”¹å˜å‰æ’æ ‡è¯†
 
-              EC_arr [ j ] := machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k  , 1 ] ;   //¢Ú±È½Ï²åÈë¿Õ¼ä´óĞ¡
+              EC_arr [ j ] := machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k  , 1 ] ;   //â‘¡æ¯”è¾ƒæ’å…¥ç©ºé—´å¤§å°
 
               if EC_arr [ 1 ] = 0 then
 
@@ -292,24 +292,24 @@ begin
 
                 EC_arr [ 1 ] := EC_arr [ j ] ;
 
-                E := temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;              //¼ÇÂ¼ÓµÓĞ×îĞ¡Ç°²å¿Õ¼äµÄ»úÆ÷
+                E := temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;              //è®°å½•æ‹¥æœ‰æœ€å°å‰æ’ç©ºé—´çš„æœºå™¨
 
-                EP := temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;             //¼ÇÂ¼¼Ó¹¤Ê±¼ä
+                EP := temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;             //è®°å½•åŠ å·¥æ—¶é—´
 
-                Ek := k ;                                                       //¼ÇÂ¼Ç°²åµÄÎ»ÖÃ
+                Ek := k ;                                                       //è®°å½•å‰æ’çš„ä½ç½®
 
               end ;
 
             end ;
 
             if  temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ]
-                > machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]    //Ã»ÓĞÇ°²å¿Õ¼ä
+                > machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]    //æ²¡æœ‰å‰æ’ç©ºé—´
 
             then
 
             begin
 
-              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 2 ] = 0 then    //»úÆ÷ÉÏÃ»ÓĞ¹¤¼ş£¨ÂÖµ½ÁË»úÆ÷ÉÏ×îºóÒ»¸ö¹¤ĞòÁË£©
+              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 2 ] = 0 then    //æœºå™¨ä¸Šæ²¡æœ‰å·¥ä»¶ï¼ˆè½®åˆ°äº†æœºå™¨ä¸Šæœ€åä¸€ä¸ªå·¥åºäº†ï¼‰
 
               begin
 
@@ -325,17 +325,17 @@ begin
 
                   FC_arr [ 1 ] := FC_arr [ j ] ;
 
-                  F := temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;            //Ñ¡¶¨ÓµÓĞ×îĞ¡Íê¹¤Ê±¼äµÄ»úÆ÷
+                  F := temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;            //é€‰å®šæ‹¥æœ‰æœ€å°å®Œå·¥æ—¶é—´çš„æœºå™¨
 
-                  FP := temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;           //¼ÇÂ¼¼Ó¹¤Ê±¼ä
+                  FP := temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;           //è®°å½•åŠ å·¥æ—¶é—´
 
-                  Fk := k ;                                                     //¼ÇÂ¼Î»ÖÃ
+                  Fk := k ;                                                     //è®°å½•ä½ç½®
 
                 end;
 
               end ;
 
-              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 2 ] > 0 then     //»úÆ÷ÉÏÓĞ¹¤¼ş£¨»¹Ã»ÂÖµ½»úÆ÷ÉÏ×îºóÒ»¸ö¹¤Ğò£©
+              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 2 ] > 0 then     //æœºå™¨ä¸Šæœ‰å·¥ä»¶ï¼ˆè¿˜æ²¡è½®åˆ°æœºå™¨ä¸Šæœ€åä¸€ä¸ªå·¥åºï¼‰
 
               begin
 
@@ -347,7 +347,7 @@ begin
 
           end ;
 
-          if k > 1 then                                                         //²»ÊÇ»úÆ÷ÉÏ¼Ó¹¤µÚÒ»¸ö¹¤Ğò
+          if k > 1 then                                                         //ä¸æ˜¯æœºå™¨ä¸ŠåŠ å·¥ç¬¬ä¸€ä¸ªå·¥åº
 
           begin
 
@@ -355,15 +355,15 @@ begin
 
                + temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ]
 
-               <= machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]    //ÓĞÇ°²å¿Õ¼ä
+               <= machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]    //æœ‰å‰æ’ç©ºé—´
 
             then
 
             begin
 
-              insert_flag := True ;                                             //¢Ù¸Ä±äÇ°²å±êÊ¶
+              insert_flag := True ;                                             //â‘ æ”¹å˜å‰æ’æ ‡è¯†
 
-              EC_arr [ j ] := machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k  , 1 ]    //¢Ú±È½Ï²åÈë¿Õ¼ä´óĞ¡
+              EC_arr [ j ] := machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k  , 1 ]    //â‘¡æ¯”è¾ƒæ’å…¥ç©ºé—´å¤§å°
                            - machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k - 1 , 2 ] ;
 
               if EC_arr [ 1 ] = 0 then
@@ -374,7 +374,7 @@ begin
 
               end;
 
-              if EC_arr [ j ] <= EC_arr [ 1 ]  then                              //Ñ¡²åÈë¿Õ¼ä×îĞ¡µÄ
+              if EC_arr [ j ] <= EC_arr [ 1 ]  then                              //é€‰æ’å…¥ç©ºé—´æœ€å°çš„
 
               begin
 
@@ -382,11 +382,11 @@ begin
 
                 EC_arr [ 1 ] := EC_arr [ j ] ;
 
-                E := temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;              //¼ÇÂ¼ÓµÓĞ×îĞ¡Ç°²å¿Õ¼äµÄ»úÆ÷
+                E := temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;              //è®°å½•æ‹¥æœ‰æœ€å°å‰æ’ç©ºé—´çš„æœºå™¨
 
-                Ep := temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;             //¼ÇÂ¼¼Ó¹¤Ê±¼ä
+                Ep := temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;             //è®°å½•åŠ å·¥æ—¶é—´
 
-                EK := k ;                                                       //¼ÇÂ¼Ç°²åµÄÎ»ÖÃ
+                EK := k ;                                                       //è®°å½•å‰æ’çš„ä½ç½®
 
               end ;
 
@@ -394,13 +394,13 @@ begin
 
             if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k - 1 , 2 ]
                + temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ]
-               > machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]    //Ã»ÓĞÇ°²å¿Õ¼ä
+               > machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]    //æ²¡æœ‰å‰æ’ç©ºé—´
 
             then
 
             begin
 
-              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]      //»úÆ÷ÉÏÃ»ÓĞ¹¤¼ş£¨ÂÖµ½ÁË»úÆ÷ÉÏ×îºóÒ»¸ö¹¤ĞòÁË£©
+              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]      //æœºå™¨ä¸Šæ²¡æœ‰å·¥ä»¶ï¼ˆè½®åˆ°äº†æœºå™¨ä¸Šæœ€åä¸€ä¸ªå·¥åºäº†ï¼‰
                  - machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k - 1 , 2 ] < 0
 
               then
@@ -420,7 +420,7 @@ begin
 
                   FC_arr [ 1 ] := FC_arr [ j ] ;
 
-                  F := temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;            //Ñ¡¶¨ÓµÓĞ×îĞ¡Íê¹¤Ê±¼äµÄ»úÆ÷
+                  F := temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;            //é€‰å®šæ‹¥æœ‰æœ€å°å®Œå·¥æ—¶é—´çš„æœºå™¨
 
                   FP := temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;
 
@@ -429,7 +429,7 @@ begin
                 end;
               end ;
 
-              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]    //»úÆ÷ÉÏÓĞ¹¤¼ş£¨»¹Ã»ÂÖµ½»úÆ÷ÉÏ×îºóÒ»¸ö¹¤Ğò£©
+              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]    //æœºå™¨ä¸Šæœ‰å·¥ä»¶ï¼ˆè¿˜æ²¡è½®åˆ°æœºå™¨ä¸Šæœ€åä¸€ä¸ªå·¥åºï¼‰
                  - machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k - 1 , 2 ] >= 0
 
               then
@@ -450,7 +450,7 @@ begin
 
       until ( temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] = 0 ) or ( j = 4 );
 
-      if insert_flag = true then                                                  //ÓĞÇ°²å¿Õ¼äÊ±Ñ¡Ôñ»úÆ÷
+      if insert_flag = true then                                                  //æœ‰å‰æ’ç©ºé—´æ—¶é€‰æ‹©æœºå™¨
 
       begin
 
@@ -491,7 +491,7 @@ begin
 
           for x := Ek to 35 do
 
-          begin                                                                   //¢ÛÈ·¶¨»úÆ÷ºó¸Ä±ä»úÆ÷´ÓµÚk¸ö¿ªÊ¼Ë³ÑÓµÄ¼Ó¹¤¹¤¼şµÄ¿ªÊ¼½áÊøÊ±¼ä
+          begin                                                                   //â‘¢ç¡®å®šæœºå™¨åæ”¹å˜æœºå™¨ä»ç¬¬kä¸ªå¼€å§‹é¡ºå»¶çš„åŠ å·¥å·¥ä»¶çš„å¼€å§‹ç»“æŸæ—¶é—´
 
             machine_pro_pos [ M_arr [ i ] , x + 1 , 1 ]
             := machine_pro_pos1 [ M_arr [ i ] , x , 1 ] ;
@@ -510,11 +510,11 @@ begin
 
           end;
 
-          machine_pro_pos [ M_arr [ i ] , Ek , 1 ] := 0 ;                         //¢Ü¸üĞÂ»úÆ÷jµÚk¸öµÄ¼Ó¹¤¹¤Ğò¿ªÊ¼½áÊøÊ±¼ä
+          machine_pro_pos [ M_arr [ i ] , Ek , 1 ] := 0 ;                         //â‘£æ›´æ–°æœºå™¨jç¬¬kä¸ªçš„åŠ å·¥å·¥åºå¼€å§‹ç»“æŸæ—¶é—´
 
           machine_pro_pos [ M_arr [ i ] , Ek , 2 ] := EP ;
 
-          job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 1 ] := 0 ;                //¢İ¸üĞÂ¹¤¼şiµÚÒ»µÀ¹¤ĞòµÄ¼Ó¹¤Íê³ÉÊ±¼ä
+          job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 1 ] := 0 ;                //â‘¤æ›´æ–°å·¥ä»¶iç¬¬ä¸€é“å·¥åºçš„åŠ å·¥å®Œæˆæ—¶é—´
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 2 ] := Ep ;
 
@@ -553,7 +553,7 @@ begin
 
           for x := Ek to 35 do
 
-          begin                                                                   //¢ÛÈ·¶¨»úÆ÷ºó¸Ä±ä»úÆ÷´ÓµÚk¸ö¿ªÊ¼Ë³ÑÓµÄ¼Ó¹¤¹¤¼şµÄ¿ªÊ¼½áÊøÊ±¼ä
+          begin                                                                   //â‘¢ç¡®å®šæœºå™¨åæ”¹å˜æœºå™¨ä»ç¬¬kä¸ªå¼€å§‹é¡ºå»¶çš„åŠ å·¥å·¥ä»¶çš„å¼€å§‹ç»“æŸæ—¶é—´
 
             machine_pro_pos [ M_arr [ i ] , x + 1 , 1 ]
             := machine_pro_pos1 [ M_arr [ i ] , x , 1 ] ;
@@ -573,13 +573,13 @@ begin
           end;
 
           machine_pro_pos [ M_arr [ i ] , Ek , 1 ]
-          := machine_pro_pos [ M_arr [ i ] , Ek - 1 , 2 ] ;                       //¢Ü¸üĞÂ»úÆ÷jµÚk¸öµÄ¼Ó¹¤¹¤Ğò¿ªÊ¼½áÊøÊ±¼ä
+          := machine_pro_pos [ M_arr [ i ] , Ek - 1 , 2 ] ;                       //â‘£æ›´æ–°æœºå™¨jç¬¬kä¸ªçš„åŠ å·¥å·¥åºå¼€å§‹ç»“æŸæ—¶é—´
 
           machine_pro_pos [ M_arr [ i ] , Ek , 2 ]
           := machine_pro_pos [ M_arr [ i ] , Ek - 1 , 2 ] + Ep ;
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 1 ]
-          := machine_pro_pos [ M_arr [ i ] , Ek - 1 , 2 ] ;                       //¢İ¸üĞÂ¹¤¼şiµÚÒ»µÀ¹¤ĞòµÄ¼Ó¹¤Íê³ÉÊ±¼ä
+          := machine_pro_pos [ M_arr [ i ] , Ek - 1 , 2 ] ;                       //â‘¤æ›´æ–°å·¥ä»¶iç¬¬ä¸€é“å·¥åºçš„åŠ å·¥å®Œæˆæ—¶é—´
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 2 ]
           :=  machine_pro_pos [ M_arr [ i ] , Ek - 1 , 2 ] + Ep ;
@@ -594,7 +594,7 @@ begin
 
       end ;
 
-      if insert_flag = false then                                                 //ÎŞÇ°²å¿Õ¼äÊ±Ñ¡Ôñ»úÆ÷
+      if insert_flag = false then                                                 //æ— å‰æ’ç©ºé—´æ—¶é€‰æ‹©æœºå™¨
 
       begin
 
@@ -608,11 +608,11 @@ begin
 
         begin
 
-          machine_pro_pos [ M_arr [ i ] , Fk , 1 ] := 0 ;                       //¢Ü¸üĞÂ»úÆ÷jµÚk¸öµÄ¼Ó¹¤¹¤Ğò¿ªÊ¼½áÊøÊ±¼ä
+          machine_pro_pos [ M_arr [ i ] , Fk , 1 ] := 0 ;                       //â‘£æ›´æ–°æœºå™¨jç¬¬kä¸ªçš„åŠ å·¥å·¥åºå¼€å§‹ç»“æŸæ—¶é—´
 
           machine_pro_pos [ M_arr [ i ] , Fk , 2 ] := FP ;
 
-          job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 1 ] := 0 ;                  //¢İ¸üĞÂ¹¤¼şiµÚÒ»µÀ¹¤ĞòµÄ¼Ó¹¤Íê³ÉÊ±¼ä
+          job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 1 ] := 0 ;                  //â‘¤æ›´æ–°å·¥ä»¶iç¬¬ä¸€é“å·¥åºçš„åŠ å·¥å®Œæˆæ—¶é—´
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 2 ] := FP ;
 
@@ -629,13 +629,13 @@ begin
         begin
 
           machine_pro_pos [ M_arr [ i ] , Fk , 1 ]
-          := machine_pro_pos [ M_arr [ i ] , Fk - 1 , 2 ] ;                        //¢Ü¸üĞÂ»úÆ÷jµÚk¸öµÄ¼Ó¹¤¹¤Ğò¿ªÊ¼½áÊøÊ±¼ä
+          := machine_pro_pos [ M_arr [ i ] , Fk - 1 , 2 ] ;                        //â‘£æ›´æ–°æœºå™¨jç¬¬kä¸ªçš„åŠ å·¥å·¥åºå¼€å§‹ç»“æŸæ—¶é—´
 
           machine_pro_pos [ M_arr [ i ] , Fk , 2 ]
           := machine_pro_pos [ M_arr [ i ] , Fk , 1 ] + FP ;
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 1 ]
-          := machine_pro_pos [ M_arr [ i ] , Fk - 1 , 2 ]  ;                       //¢İ¸üĞÂ¹¤¼şiµÚÒ»µÀ¹¤ĞòµÄ¼Ó¹¤Íê³ÉÊ±¼ä
+          := machine_pro_pos [ M_arr [ i ] , Fk - 1 , 2 ]  ;                       //â‘¤æ›´æ–°å·¥ä»¶iç¬¬ä¸€é“å·¥åºçš„åŠ å·¥å®Œæˆæ—¶é—´
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 2 ]
           := machine_pro_pos [ M_arr [ i ] , Fk , 1 ] + FP ;
@@ -652,7 +652,7 @@ begin
 
     end ;
 
-    if job_count_arr [ temp_o_arr [ i ] ] > 1 then                              //Èç¹û²»ÊÇ¹¤¼şµÄµÚÒ»¸ö¹¤Ğò
+    if job_count_arr [ temp_o_arr [ i ] ] > 1 then                              //å¦‚æœä¸æ˜¯å·¥ä»¶çš„ç¬¬ä¸€ä¸ªå·¥åº
 
     begin
 
@@ -664,11 +664,11 @@ begin
 
         repeat
 
-          if K = 1 then                                                         //»úÆ÷ÉÏµÚÒ»¸ö¼Ó¹¤
+          if K = 1 then                                                         //æœºå™¨ä¸Šç¬¬ä¸€ä¸ªåŠ å·¥
 
           begin
 
-            if job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]        //ÓĞÇ°²å¿Õ¼ä
+            if job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]        //æœ‰å‰æ’ç©ºé—´
                + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
                                     temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ]
                + temp_P_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ]
@@ -679,10 +679,10 @@ begin
 
             begin
 
-              insert_flag := True ;                                             //¢Ù¸Ä±äÇ°²å±êÊ¶
+              insert_flag := True ;                                             //â‘ æ”¹å˜å‰æ’æ ‡è¯†
 
               EC_arr [ j ]
-              := machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k  , 1 ] ;   //¢Ú±È½Ï²åÈë¿Õ¼ä´óĞ¡
+              := machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k  , 1 ] ;   //â‘¡æ¯”è¾ƒæ’å…¥ç©ºé—´å¤§å°
 
               if EC_arr [ 1 ] = 0 then
 
@@ -700,16 +700,16 @@ begin
 
                 EC_arr [ 1 ] := EC_arr [ j ] ;
 
-                E := temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;              //¼ÇÂ¼ÓµÓĞ×îĞ¡Ç°²å¿Õ¼äµÄ»úÆ÷
+                E := temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;              //è®°å½•æ‹¥æœ‰æœ€å°å‰æ’ç©ºé—´çš„æœºå™¨
 
-                EP := temp_P_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;             //¼ÇÂ¼¼Ó¹¤Ê±¼ä
+                EP := temp_P_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;             //è®°å½•åŠ å·¥æ—¶é—´
 
-                Ek := k ;                                                       //¼ÇÂ¼Ç°²åµÄÎ»ÖÃ
+                Ek := k ;                                                       //è®°å½•å‰æ’çš„ä½ç½®
 
               end;
             end;
 
-            if  job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]        //Ã»ÓĞÇ°²å¿Õ¼ä
+            if  job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]        //æ²¡æœ‰å‰æ’ç©ºé—´
                + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
                                     temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ]
                + temp_P_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ]
@@ -720,7 +720,7 @@ begin
 
             begin
 
-              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k , 2 ] = 0 then    //µ½ÁË»úÆ÷ÉÏ×îºóÒ»¸ö¹¤Ğò
+              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k , 2 ] = 0 then    //åˆ°äº†æœºå™¨ä¸Šæœ€åä¸€ä¸ªå·¥åº
 
               begin
 
@@ -736,17 +736,17 @@ begin
 
                   FC_arr [ 1 ] := FC_arr [ j ] ;
 
-                  F := temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;            //Ñ¡¶¨ÓµÓĞ×îĞ¡Íê¹¤Ê±¼äµÄ»úÆ÷
+                  F := temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;            //é€‰å®šæ‹¥æœ‰æœ€å°å®Œå·¥æ—¶é—´çš„æœºå™¨
 
-                  FP := temp_P_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;           //¼ÇÂ¼¼Ó¹¤Ê±¼ä
+                  FP := temp_P_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;           //è®°å½•åŠ å·¥æ—¶é—´
 
-                  Fk := k ;                                                     //¼ÇÂ¼Î»ÖÃ
+                  Fk := k ;                                                     //è®°å½•ä½ç½®
 
                 end;
 
               end ;
 
-              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k , 2 ] > 0 then     //»úÆ÷ÉÏÓĞ¹¤¼ş£¨»¹Ã»ÂÖµ½»úÆ÷ÉÏ×îºóÒ»¸ö¹¤Ğò£©
+              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k , 2 ] > 0 then     //æœºå™¨ä¸Šæœ‰å·¥ä»¶ï¼ˆè¿˜æ²¡è½®åˆ°æœºå™¨ä¸Šæœ€åä¸€ä¸ªå·¥åºï¼‰
 
               begin
 
@@ -758,11 +758,11 @@ begin
 
           end ;
 
-          if K > 1 then                                                         //»úÆ÷ÉÏ²»ÊÇµÚÒ»¸ö¼Ó¹¤
+          if K > 1 then                                                         //æœºå™¨ä¸Šä¸æ˜¯ç¬¬ä¸€ä¸ªåŠ å·¥
 
           begin
 
-            if  Max ( job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]        //ÓĞÇ°²å¿Õ¼ä
+            if  Max ( job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]        //æœ‰å‰æ’ç©ºé—´
                       + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
                                     temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ] ,
                       machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k - 1 , 2 ] )
@@ -773,9 +773,9 @@ begin
             then
 
             begin
-              insert_flag := True ;                                             //¢Ù¸Ä±äÇ°²å±êÊ¶
+              insert_flag := True ;                                             //â‘ æ”¹å˜å‰æ’æ ‡è¯†
 
-              EC_arr [ j ] := machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k  , 1 ]    //¢Ú±È½Ï²åÈë¿Õ¼ä´óĞ¡
+              EC_arr [ j ] := machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k  , 1 ]    //â‘¡æ¯”è¾ƒæ’å…¥ç©ºé—´å¤§å°
                            - machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k - 1 , 2 ] ;
 
               if EC_arr [ 1 ] = 0 then
@@ -786,7 +786,7 @@ begin
 
               end;
 
-              if EC_arr [ j ] <= EC_arr [ 1 ]  then                              //Ñ¡²åÈë¿Õ¼ä×îĞ¡µÄ
+              if EC_arr [ j ] <= EC_arr [ 1 ]  then                              //é€‰æ’å…¥ç©ºé—´æœ€å°çš„
 
               begin
 
@@ -794,16 +794,16 @@ begin
 
                 EC_arr [ 1 ] := EC_arr [ j ] ;
 
-                E := temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;        //¼ÇÂ¼ÓµÓĞ×îĞ¡Ç°²å¿Õ¼äµÄ»úÆ÷
+                E := temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;        //è®°å½•æ‹¥æœ‰æœ€å°å‰æ’ç©ºé—´çš„æœºå™¨
 
-                Ep := temp_P_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;       //¼ÇÂ¼¼Ó¹¤Ê±¼ä
+                Ep := temp_P_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;       //è®°å½•åŠ å·¥æ—¶é—´
 
-                EK := k ;                                                       //¼ÇÂ¼Ç°²åµÄÎ»ÖÃ
+                EK := k ;                                                       //è®°å½•å‰æ’çš„ä½ç½®
 
               end ;
             end;
 
-            if   Max ( job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]        //Ã»ÓĞÇ°²å¿Õ¼ä
+            if   Max ( job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]        //æ²¡æœ‰å‰æ’ç©ºé—´
                       + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
                                     temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ] ,
                       machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k - 1 , 2 ] )
@@ -815,7 +815,7 @@ begin
 
             begin
 
-              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k , 1 ]      //»úÆ÷ÉÏÃ»ÓĞ¹¤¼ş£¨ÂÖµ½ÁË»úÆ÷ÉÏ×îºóÒ»¸ö¹¤ĞòÁË£©
+              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k , 1 ]      //æœºå™¨ä¸Šæ²¡æœ‰å·¥ä»¶ï¼ˆè½®åˆ°äº†æœºå™¨ä¸Šæœ€åä¸€ä¸ªå·¥åºäº†ï¼‰
                  - machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k - 1 , 2 ] < 0
 
               then
@@ -835,7 +835,7 @@ begin
 
                   FC_arr [ 1 ] := FC_arr [ j ] ;
 
-                  F := temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;            //Ñ¡¶¨ÓµÓĞ×îĞ¡Íê¹¤Ê±¼äµÄ»úÆ÷
+                  F := temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;            //é€‰å®šæ‹¥æœ‰æœ€å°å®Œå·¥æ—¶é—´çš„æœºå™¨
 
                   FP := temp_P_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;
 
@@ -844,7 +844,7 @@ begin
                 end;
               end ;
 
-              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k , 1 ]    //»úÆ÷ÉÏÓĞ¹¤¼ş£¨»¹Ã»ÂÖµ½»úÆ÷ÉÏ×îºóÒ»¸ö¹¤Ğò£©
+              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k , 1 ]    //æœºå™¨ä¸Šæœ‰å·¥ä»¶ï¼ˆè¿˜æ²¡è½®åˆ°æœºå™¨ä¸Šæœ€åä¸€ä¸ªå·¥åºï¼‰
 
                  - machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k - 1 , 2 ] >= 0
 
@@ -866,7 +866,7 @@ begin
 
       until ( temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] = 0 ) or  ( j = 4 ) ;
 
-      if insert_flag = True then                                                //¿ÉÑ¡»úÆ÷ÄÚÓĞ¿ÉÇ°²åµÄ
+      if insert_flag = True then                                                //å¯é€‰æœºå™¨å†…æœ‰å¯å‰æ’çš„
       begin
 
         M_arr [ i ] := E ;
@@ -902,7 +902,7 @@ begin
 
           for x := Ek to 35 do
 
-          begin                                                                   //¢ÛÈ·¶¨»úÆ÷ºó¸Ä±ä»úÆ÷´ÓµÚk¸ö¿ªÊ¼Ë³ÑÓµÄ¼Ó¹¤¹¤¼şµÄ¿ªÊ¼½áÊøÊ±¼ä
+          begin                                                                   //â‘¢ç¡®å®šæœºå™¨åæ”¹å˜æœºå™¨ä»ç¬¬kä¸ªå¼€å§‹é¡ºå»¶çš„åŠ å·¥å·¥ä»¶çš„å¼€å§‹ç»“æŸæ—¶é—´
 
             machine_pro_pos [ M_arr [ i ] , x + 1 , 1 ]
             := machine_pro_pos1 [ M_arr [ i ] , x , 1 ] ;
@@ -923,13 +923,13 @@ begin
 
           machine_pro_pos [ M_arr [ i ] , Ek , 1 ] := job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]
                + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
-                                    M_arr [ i ] ] ;            //¢Ü¸üĞÂ»úÆ÷jµÚk¸öµÄ¼Ó¹¤¹¤Ğò¿ªÊ¼½áÊøÊ±¼ä
+                                    M_arr [ i ] ] ;            //â‘£æ›´æ–°æœºå™¨jç¬¬kä¸ªçš„åŠ å·¥å·¥åºå¼€å§‹ç»“æŸæ—¶é—´
 
           machine_pro_pos [ M_arr [ i ] , Ek , 2 ] :=  machine_pro_pos [ M_arr [ i ] , Ek , 1 ] + EP ;
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 1 ] := job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]
                + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
-                                    M_arr [ i ] ] ;                //¢İ¸üĞÂ¹¤¼şiµÚÒ»µÀ¹¤ĞòµÄ¼Ó¹¤Íê³ÉÊ±¼ä
+                                    M_arr [ i ] ] ;                //â‘¤æ›´æ–°å·¥ä»¶iç¬¬ä¸€é“å·¥åºçš„åŠ å·¥å®Œæˆæ—¶é—´
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 2 ] := machine_pro_pos [ M_arr [ i ] , Ek , 1 ] + Ep ;
 
@@ -968,7 +968,7 @@ begin
 
           for x := Ek to 35 do
 
-          begin                                                                   //¢ÛÈ·¶¨»úÆ÷ºó¸Ä±ä»úÆ÷´ÓµÚk¸ö¿ªÊ¼Ë³ÑÓµÄ¼Ó¹¤¹¤¼şµÄ¿ªÊ¼½áÊøÊ±¼ä
+          begin                                                                   //â‘¢ç¡®å®šæœºå™¨åæ”¹å˜æœºå™¨ä»ç¬¬kä¸ªå¼€å§‹é¡ºå»¶çš„åŠ å·¥å·¥ä»¶çš„å¼€å§‹ç»“æŸæ—¶é—´
 
             machine_pro_pos [ M_arr [ i ] , x + 1 , 1 ]
             := machine_pro_pos1 [ M_arr [ i ] , x , 1 ] ;
@@ -991,7 +991,7 @@ begin
           := Max( machine_pro_pos [ M_arr [ i ] , Ek - 1 , 2 ] ,
                   job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]
                   + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
-                                    M_arr [ i ] ] ) ;                       //¢Ü¸üĞÂ»úÆ÷jµÚk¸öµÄ¼Ó¹¤¹¤Ğò¿ªÊ¼½áÊøÊ±¼ä
+                                    M_arr [ i ] ] ) ;                       //â‘£æ›´æ–°æœºå™¨jç¬¬kä¸ªçš„åŠ å·¥å·¥åºå¼€å§‹ç»“æŸæ—¶é—´
 
           machine_pro_pos [ M_arr [ i ] , Ek , 2 ]
           := machine_pro_pos [ M_arr [ i ] , Ek , 1 ] + Ep ;
@@ -1000,7 +1000,7 @@ begin
           :=  Max( machine_pro_pos [ M_arr [ i ] , Ek - 1 , 2 ] ,
                   job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]
                   + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
-                                    M_arr [ i ] ] ) ;                       //¢İ¸üĞÂ¹¤¼şiµÚÒ»µÀ¹¤ĞòµÄ¼Ó¹¤Íê³ÉÊ±¼ä
+                                    M_arr [ i ] ] ) ;                       //â‘¤æ›´æ–°å·¥ä»¶iç¬¬ä¸€é“å·¥åºçš„åŠ å·¥å®Œæˆæ—¶é—´
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 2 ]
           :=  machine_pro_pos [ M_arr [ i ] , Ek , 1 ] + Ep ;
@@ -1015,7 +1015,7 @@ begin
 
       end ;
 
-      if insert_flag = false then                                                //¿ÉÑ¡»úÆ÷ÄÚÓĞ¿ÉÇ°²åµÄ
+      if insert_flag = false then                                                //å¯é€‰æœºå™¨å†…æœ‰å¯å‰æ’çš„
 
       begin
 
@@ -1031,13 +1031,13 @@ begin
 
           machine_pro_pos [ M_arr [ i ] , Fk , 1 ] := job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]
                + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
-                                    M_arr [ i ] ] ;                       //¢Ü¸üĞÂ»úÆ÷jµÚk¸öµÄ¼Ó¹¤¹¤Ğò¿ªÊ¼½áÊøÊ±¼ä
+                                    M_arr [ i ] ] ;                       //â‘£æ›´æ–°æœºå™¨jç¬¬kä¸ªçš„åŠ å·¥å·¥åºå¼€å§‹ç»“æŸæ—¶é—´
 
           machine_pro_pos [ M_arr [ i ] , Fk , 2 ] := machine_pro_pos [ M_arr [ i ] , Fk , 1 ] + FP ;
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 1 ] := job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]
                + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
-                                    M_arr [ i ] ] ;                  //¢İ¸üĞÂ¹¤¼şiµÚÒ»µÀ¹¤ĞòµÄ¼Ó¹¤Íê³ÉÊ±¼ä
+                                    M_arr [ i ] ] ;                  //â‘¤æ›´æ–°å·¥ä»¶iç¬¬ä¸€é“å·¥åºçš„åŠ å·¥å®Œæˆæ—¶é—´
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 2 ] := machine_pro_pos [ M_arr [ i ] , Fk , 1 ] + FP ;
 
@@ -1057,7 +1057,7 @@ begin
           := Max( machine_pro_pos [ M_arr [ i ] , Fk - 1 , 2 ] ,
                   job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]
                   + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
-                                    M_arr [ i ] ] )  ;                       //¢Ü¸üĞÂ»úÆ÷jµÚk¸öµÄ¼Ó¹¤¹¤Ğò¿ªÊ¼½áÊøÊ±¼ä
+                                    M_arr [ i ] ] )  ;                       //â‘£æ›´æ–°æœºå™¨jç¬¬kä¸ªçš„åŠ å·¥å·¥åºå¼€å§‹ç»“æŸæ—¶é—´
 
           machine_pro_pos [ M_arr [ i ] , Fk , 2 ]
           := machine_pro_pos [ M_arr [ i ] , Fk , 1 ] + FP ;
@@ -1066,7 +1066,7 @@ begin
           := Max( machine_pro_pos [ M_arr [ i ] , Fk - 1 , 2 ] ,
                   job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]
                   + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
-                                    M_arr [ i ] ] ) ;                       //¢İ¸üĞÂ¹¤¼şiµÚnµÀ¹¤ĞòµÄ¼Ó¹¤Íê³ÉÊ±¼ä
+                                    M_arr [ i ] ] ) ;                       //â‘¤æ›´æ–°å·¥ä»¶iç¬¬né“å·¥åºçš„åŠ å·¥å®Œæˆæ—¶é—´
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 2 ]
           := machine_pro_pos [ M_arr [ i ] , Fk , 1 ] + FP ;
@@ -1218,46 +1218,46 @@ begin
     
   end;
 
-////////////////////////////////////////////////                                ¼ÓÉÏ×ÊÔ´Ô¼Êø¼ÆËãÍê¹¤Ê±¼ä
+////////////////////////////////////////////////                                åŠ ä¸Šèµ„æºçº¦æŸè®¡ç®—å®Œå·¥æ—¶é—´
 
   for i := 1 to max_i do
 
   begin
 
-    count_op [ OMP.op_arr [ i ] ] := count_op [ OMP.op_arr [ i ] ] + 1 ;        //¹¤Ğò+1
+    count_op [ OMP.op_arr [ i ] ] := count_op [ OMP.op_arr [ i ] ] + 1 ;        //å·¥åº+1
 
-    count_ma [ OMP.ma_arr [ i ] ] := count_ma [ OMP.ma_arr [ i ] ] + 1 ;        //»úÆ÷¼Ó¹¤Î»ÖÃ+1
+    count_ma [ OMP.ma_arr [ i ] ] := count_ma [ OMP.ma_arr [ i ] ] + 1 ;        //æœºå™¨åŠ å·¥ä½ç½®+1
 
     min_mac := 0 ; min_mac1 := 0 ; min_mac2 := 0 ; min_mac3 := 0 ;
 
     fillchar ( young_arr , sizeof ( two_arr3 ) , 0 ) ;
 
-    if count_ma [ OMP.ma_arr [ i ] ] = 1 then                                   //»úÆ÷µÚÒ»¸öÎ»ÖÃ¼Ó¹¤
+    if count_ma [ OMP.ma_arr [ i ] ] = 1 then                                   //æœºå™¨ç¬¬ä¸€ä¸ªä½ç½®åŠ å·¥
 
     begin
 
-      if count_op [ OMP.op_arr [ i ] ] = 1 then                                 //¹¤¼şµÚÒ»¸ö¹¤Ğò
+      if count_op [ OMP.op_arr [ i ] ] = 1 then                                 //å·¥ä»¶ç¬¬ä¸€ä¸ªå·¥åº
 
       begin
 
         if   ( t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] > 0 )
-         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )     //×ÊÔ´³ä×ãÊ±
+         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )     //èµ„æºå……è¶³æ—¶
          and ( t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] > 0 )
         then
 
         begin
 
-          op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] := OMP.pr_arr [ i ] ;               //Íê¹¤Ê±¼ä
+          op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] := OMP.pr_arr [ i ] ;               //å®Œå·¥æ—¶é—´
 
-          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] := 0 ;  //
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
           := OMP.pr_arr [ i ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -1274,12 +1274,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -1475,16 +1475,16 @@ begin
 
            op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] := OMP.pr_arr [ i ] + min_time ;
 
-           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                          //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                          //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
            job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
            := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -1521,7 +1521,7 @@ begin
               begin
 
                 t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ]
-                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ÈıÖÖ×ÊÔ´¸÷¼ÓÒ»
+                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ä¸‰ç§èµ„æºå„åŠ ä¸€
 
               end;
 
@@ -1544,12 +1544,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -1561,12 +1561,12 @@ begin
 
       end
 
-      else if count_op [ OMP.op_arr [ i ] ] = 2 then                            //»úÆ÷µÚÒ»¸öÎ»ÖÃ¼Ó¹¤£¬¹¤¼şµÚ¶ş¸ö¹¤Ğò
+      else if count_op [ OMP.op_arr [ i ] ] = 2 then                            //æœºå™¨ç¬¬ä¸€ä¸ªä½ç½®åŠ å·¥ï¼Œå·¥ä»¶ç¬¬äºŒä¸ªå·¥åº
 
       begin
 
         if   ( t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] > 0 )
-         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //×ÊÔ´³ä×ãÊ±
+         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //èµ„æºå……è¶³æ—¶
          and ( t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] > 0 )
         then
 
@@ -1574,18 +1574,18 @@ begin
 
           op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ]
           := OMP.pr_arr [ i ] + op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ]
-             + temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ;                        //Íê¹¤Ê±¼ä
+             + temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ;                        //å®Œå·¥æ—¶é—´
 
-          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] -  OMP.pr_arr [ i ] ;  //
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -1602,13 +1602,13 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -1808,16 +1808,16 @@ begin
            op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ] +
            temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ) ;
 
-           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -1854,7 +1854,7 @@ begin
               begin
 
                 t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ]
-                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ÈıÖÖ×ÊÔ´¸÷¼ÓÒ»
+                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ä¸‰ç§èµ„æºå„åŠ ä¸€
 
               end;
 
@@ -1877,12 +1877,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -1894,12 +1894,12 @@ begin
 
       end
 
-      else if count_op [ OMP.op_arr [ i ] ] = 3 then                            //»úÆ÷µÚÒ»¸öÎ»ÖÃ¼Ó¹¤£¬¹¤¼şµÚÈı¸ö¹¤Ğò
+      else if count_op [ OMP.op_arr [ i ] ] = 3 then                            //æœºå™¨ç¬¬ä¸€ä¸ªä½ç½®åŠ å·¥ï¼Œå·¥ä»¶ç¬¬ä¸‰ä¸ªå·¥åº
 
       begin
 
         if   ( t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] > 0 )
-         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //×ÊÔ´³ä×ãÊ±
+         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //èµ„æºå……è¶³æ—¶
          and ( t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] > 0 )
         then
 
@@ -1907,18 +1907,18 @@ begin
 
           op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ]
           := OMP.pr_arr [ i ] + op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ]
-             + temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ;                        //Íê¹¤Ê±¼ä
+             + temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ;                        //å®Œå·¥æ—¶é—´
 
-          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]                 //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                                  //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                                  //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;             //
 
@@ -1935,12 +1935,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -2139,16 +2139,16 @@ begin
            op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ] +
            temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ) ;
 
-           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
            job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
            := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -2185,7 +2185,7 @@ begin
               begin
 
                 t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ]
-                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ÈıÖÖ×ÊÔ´¸÷¼ÓÒ»
+                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ä¸‰ç§èµ„æºå„åŠ ä¸€
 
               end;
 
@@ -2208,12 +2208,12 @@ begin
            := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
            t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-           := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+           := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
            t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
            := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-           if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+           if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
            begin
 
@@ -2226,33 +2226,33 @@ begin
       end ;
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     end
-    else                                   //²»ÊÇÔÚ»úÆ÷µÚÒ»Î»¹¤Ğò¼Ó¹¤
+    else                                   //ä¸æ˜¯åœ¨æœºå™¨ç¬¬ä¸€ä½å·¥åºåŠ å·¥
 
     begin
 
-      if count_op [ OMP.op_arr [ i ] ] = 1 then                                 //¹¤¼şµÚÒ»¸ö¹¤Ğò
+      if count_op [ OMP.op_arr [ i ] ] = 1 then                                 //å·¥ä»¶ç¬¬ä¸€ä¸ªå·¥åº
 
       begin
 
         if   ( t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] > 0 )
-         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //×ÊÔ´³ä×ãÊ±
+         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //èµ„æºå……è¶³æ—¶
          and ( t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] > 0 )
         then
 
         begin
 
-          op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] := OMP.pr_arr [ i ] + m_final [ OMP.ma_arr [ i ] ] ;          //Íê¹¤Ê±¼ä
+          op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] := OMP.pr_arr [ i ] + m_final [ OMP.ma_arr [ i ] ] ;          //å®Œå·¥æ—¶é—´
 
-          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] -  OMP.pr_arr [ i ] ;  //
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -2269,12 +2269,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -2470,16 +2470,16 @@ begin
            op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] := OMP.pr_arr [ i ]
            + max ( min_time , m_final [ OMP.ma_arr [ i ] ] ) ;
 
-           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -2516,7 +2516,7 @@ begin
               begin
 
                 t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ]
-                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ÈıÖÖ×ÊÔ´¸÷¼ÓÒ»
+                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ä¸‰ç§èµ„æºå„åŠ ä¸€
 
               end;
 
@@ -2539,12 +2539,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -2555,12 +2555,12 @@ begin
         end ;
 
       end
-      else if count_op [ OMP.op_arr [ i ] ] = 2 then                            //²»ÊÇ»úÆ÷µÚÒ»¸öÎ»ÖÃ¼Ó¹¤£¬¹¤¼şµÚ¶ş¸ö¹¤Ğò
+      else if count_op [ OMP.op_arr [ i ] ] = 2 then                            //ä¸æ˜¯æœºå™¨ç¬¬ä¸€ä¸ªä½ç½®åŠ å·¥ï¼Œå·¥ä»¶ç¬¬äºŒä¸ªå·¥åº
 
       begin
 
         if   ( t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] > 0 )
-         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //×ÊÔ´³ä×ãÊ±
+         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //èµ„æºå……è¶³æ—¶
          and ( t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] > 0 )
         then
 
@@ -2569,18 +2569,18 @@ begin
           op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ]
           := OMP.pr_arr [ i ] + max ( op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ]
              + temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ,
-               m_final [ OMP.ma_arr [ i ] ] ) ;                                 //Íê¹¤Ê±¼ä
+               m_final [ OMP.ma_arr [ i ] ] ) ;                                 //å®Œå·¥æ—¶é—´
 
-          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] -  OMP.pr_arr [ i ] ;  //
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -2597,12 +2597,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -2802,16 +2802,16 @@ begin
            op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ] +
            temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ) ,  m_final [ OMP.ma_arr [ i ] ] ) ;
 
-           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -2848,7 +2848,7 @@ begin
               begin
 
                 t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ]
-                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ÈıÖÖ×ÊÔ´¸÷¼ÓÒ»
+                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ä¸‰ç§èµ„æºå„åŠ ä¸€
 
               end;
 
@@ -2871,12 +2871,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -2890,12 +2890,12 @@ begin
 
       else
 
-      if count_op [ OMP.op_arr [ i ] ] = 3 then                            //»úÆ÷·ÇÒ»¸öÎ»ÖÃ¼Ó¹¤£¬¹¤¼şµÚÈı¸ö¹¤Ğò
+      if count_op [ OMP.op_arr [ i ] ] = 3 then                            //æœºå™¨éä¸€ä¸ªä½ç½®åŠ å·¥ï¼Œå·¥ä»¶ç¬¬ä¸‰ä¸ªå·¥åº
 
       begin
 
         if   ( t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] > 0 )
-         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //×ÊÔ´³ä×ãÊ±
+         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //èµ„æºå……è¶³æ—¶
          and ( t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] > 0 )
         then
 
@@ -2904,18 +2904,18 @@ begin
           op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] :=
           OMP.pr_arr [ i ] + max ( op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ]
              + temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ,
-               m_final [ OMP.ma_arr [ i ] ] ) ;                                 //Íê¹¤Ê±¼ä
+               m_final [ OMP.ma_arr [ i ] ] ) ;                                 //å®Œå·¥æ—¶é—´
 
-          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] -  OMP.pr_arr [ i ] ;  //
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -2932,12 +2932,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -3135,16 +3135,16 @@ begin
            op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ] +
            temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ) , m_final [ OMP.ma_arr [ i ] ] ) ;
 
-           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -3181,7 +3181,7 @@ begin
               begin
 
                 t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ]
-                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ÈıÖÖ×ÊÔ´¸÷¼ÓÒ»
+                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ä¸‰ç§èµ„æºå„åŠ ä¸€
 
               end;
 
@@ -3204,12 +3204,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -3221,12 +3221,12 @@ begin
 
       end ;
 
-      if count_op [ OMP.op_arr [ i ] ] = 4 then                            //»úÆ÷·ÇÒ»¸öÎ»ÖÃ¼Ó¹¤£¬¹¤¼şµÚËÄ¸ö¹¤Ğò
+      if count_op [ OMP.op_arr [ i ] ] = 4 then                            //æœºå™¨éä¸€ä¸ªä½ç½®åŠ å·¥ï¼Œå·¥ä»¶ç¬¬å››ä¸ªå·¥åº
 
       begin
 
         if   ( t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] > 0 )
-         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //×ÊÔ´³ä×ãÊ±
+         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //èµ„æºå……è¶³æ—¶
          and ( t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] > 0 )
         then
 
@@ -3235,18 +3235,18 @@ begin
           op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] :=
           OMP.pr_arr [ i ] + max ( op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ]
              + temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ,
-               m_final [ OMP.ma_arr [ i ] ] ) ;                                 //Íê¹¤Ê±¼ä
+               m_final [ OMP.ma_arr [ i ] ] ) ;                                 //å®Œå·¥æ—¶é—´
 
-          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] -  OMP.pr_arr [ i ] ;  //
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -3263,12 +3263,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -3466,16 +3466,16 @@ begin
            op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ] +
            temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ) , m_final [ OMP.ma_arr [ i ] ] ) ;
 
-           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -3512,7 +3512,7 @@ begin
               begin
 
                 t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ]
-                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ÈıÖÖ×ÊÔ´¸÷¼ÓÒ»
+                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ä¸‰ç§èµ„æºå„åŠ ä¸€
 
               end;
 
@@ -3535,12 +3535,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -3696,7 +3696,7 @@ begin
 
     op_flag := False;
 
-    if job_count_arr [ temp_o_arr [ i ] ] = 1 then                              //Èç¹ûÊÇ¹¤¼şµÄµÚÒ»¸ö¹¤Ğò
+    if job_count_arr [ temp_o_arr [ i ] ] = 1 then                              //å¦‚æœæ˜¯å·¥ä»¶çš„ç¬¬ä¸€ä¸ªå·¥åº
 
     begin
 
@@ -3708,20 +3708,20 @@ begin
 
         repeat
 
-          if k = 1 then                                                         //ÂÖµ½ÕÒ»úÆ÷µÚÒ»¸ö¹¤ĞòÇ°ÓĞÃ»ÓĞ¿Õ
+          if k = 1 then                                                         //è½®åˆ°æ‰¾æœºå™¨ç¬¬ä¸€ä¸ªå·¥åºå‰æœ‰æ²¡æœ‰ç©º
 
           begin
 
             if  temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ]
-                <= machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]   //Èç¹ûÓĞÇ°²å¿Õ¼ä
+                <= machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]   //å¦‚æœæœ‰å‰æ’ç©ºé—´
 
             then
 
             begin
 
-              insert_flag := True ;                                             //¢Ù¸Ä±äÇ°²å±êÊ¶
+              insert_flag := True ;                                             //â‘ æ”¹å˜å‰æ’æ ‡è¯†
 
-              EC_arr [ j ] := machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k  , 1 ] ;   //¢Ú±È½Ï²åÈë¿Õ¼ä´óĞ¡
+              EC_arr [ j ] := machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k  , 1 ] ;   //â‘¡æ¯”è¾ƒæ’å…¥ç©ºé—´å¤§å°
 
               if EC_arr [ 1 ] = 0 then
 
@@ -3739,24 +3739,24 @@ begin
 
                 EC_arr [ 1 ] := EC_arr [ j ] ;
 
-                E := temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;              //¼ÇÂ¼ÓµÓĞ×îĞ¡Ç°²å¿Õ¼äµÄ»úÆ÷
+                E := temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;              //è®°å½•æ‹¥æœ‰æœ€å°å‰æ’ç©ºé—´çš„æœºå™¨
 
-                EP := temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;             //¼ÇÂ¼¼Ó¹¤Ê±¼ä
+                EP := temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;             //è®°å½•åŠ å·¥æ—¶é—´
 
-                Ek := k ;                                                       //¼ÇÂ¼Ç°²åµÄÎ»ÖÃ
+                Ek := k ;                                                       //è®°å½•å‰æ’çš„ä½ç½®
 
               end ;
 
             end ;
 
             if  temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ]
-                > machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]    //Ã»ÓĞÇ°²å¿Õ¼ä
+                > machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]    //æ²¡æœ‰å‰æ’ç©ºé—´
 
             then
 
             begin
 
-              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 2 ] = 0 then    //»úÆ÷ÉÏÃ»ÓĞ¹¤¼ş£¨ÂÖµ½ÁË»úÆ÷ÉÏ×îºóÒ»¸ö¹¤ĞòÁË£©
+              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 2 ] = 0 then    //æœºå™¨ä¸Šæ²¡æœ‰å·¥ä»¶ï¼ˆè½®åˆ°äº†æœºå™¨ä¸Šæœ€åä¸€ä¸ªå·¥åºäº†ï¼‰
 
               begin
 
@@ -3772,17 +3772,17 @@ begin
 
                   FC_arr [ 1 ] := FC_arr [ j ] ;
 
-                  F := temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;            //Ñ¡¶¨ÓµÓĞ×îĞ¡Íê¹¤Ê±¼äµÄ»úÆ÷
+                  F := temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;            //é€‰å®šæ‹¥æœ‰æœ€å°å®Œå·¥æ—¶é—´çš„æœºå™¨
 
-                  FP := temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;           //¼ÇÂ¼¼Ó¹¤Ê±¼ä
+                  FP := temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;           //è®°å½•åŠ å·¥æ—¶é—´
 
-                  Fk := k ;                                                     //¼ÇÂ¼Î»ÖÃ
+                  Fk := k ;                                                     //è®°å½•ä½ç½®
 
                 end;
 
               end ;
 
-              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 2 ] > 0 then     //»úÆ÷ÉÏÓĞ¹¤¼ş£¨»¹Ã»ÂÖµ½»úÆ÷ÉÏ×îºóÒ»¸ö¹¤Ğò£©
+              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 2 ] > 0 then     //æœºå™¨ä¸Šæœ‰å·¥ä»¶ï¼ˆè¿˜æ²¡è½®åˆ°æœºå™¨ä¸Šæœ€åä¸€ä¸ªå·¥åºï¼‰
 
               begin
 
@@ -3794,7 +3794,7 @@ begin
 
           end ;
 
-          if k > 1 then                                                         //²»ÊÇ»úÆ÷ÉÏ¼Ó¹¤µÚÒ»¸ö¹¤Ğò
+          if k > 1 then                                                         //ä¸æ˜¯æœºå™¨ä¸ŠåŠ å·¥ç¬¬ä¸€ä¸ªå·¥åº
 
           begin
 
@@ -3802,15 +3802,15 @@ begin
 
                + temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ]
 
-               <= machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]    //ÓĞÇ°²å¿Õ¼ä
+               <= machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]    //æœ‰å‰æ’ç©ºé—´
 
             then
 
             begin
 
-              insert_flag := True ;                                             //¢Ù¸Ä±äÇ°²å±êÊ¶
+              insert_flag := True ;                                             //â‘ æ”¹å˜å‰æ’æ ‡è¯†
 
-              EC_arr [ j ] := machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k  , 1 ]    //¢Ú±È½Ï²åÈë¿Õ¼ä´óĞ¡
+              EC_arr [ j ] := machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k  , 1 ]    //â‘¡æ¯”è¾ƒæ’å…¥ç©ºé—´å¤§å°
                            - machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k - 1 , 2 ] ;
 
               if EC_arr [ 1 ] = 0 then
@@ -3821,7 +3821,7 @@ begin
 
               end;
 
-              if EC_arr [ j ] <= EC_arr [ 1 ]  then                              //Ñ¡²åÈë¿Õ¼ä×îĞ¡µÄ
+              if EC_arr [ j ] <= EC_arr [ 1 ]  then                              //é€‰æ’å…¥ç©ºé—´æœ€å°çš„
 
               begin
 
@@ -3829,11 +3829,11 @@ begin
 
                 EC_arr [ 1 ] := EC_arr [ j ] ;
 
-                E := temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;              //¼ÇÂ¼ÓµÓĞ×îĞ¡Ç°²å¿Õ¼äµÄ»úÆ÷
+                E := temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;              //è®°å½•æ‹¥æœ‰æœ€å°å‰æ’ç©ºé—´çš„æœºå™¨
 
-                Ep := temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;             //¼ÇÂ¼¼Ó¹¤Ê±¼ä
+                Ep := temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;             //è®°å½•åŠ å·¥æ—¶é—´
 
-                EK := k ;                                                       //¼ÇÂ¼Ç°²åµÄÎ»ÖÃ
+                EK := k ;                                                       //è®°å½•å‰æ’çš„ä½ç½®
 
               end ;
 
@@ -3841,13 +3841,13 @@ begin
 
             if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k - 1 , 2 ]
                + temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ]
-               > machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]    //Ã»ÓĞÇ°²å¿Õ¼ä
+               > machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]    //æ²¡æœ‰å‰æ’ç©ºé—´
 
             then
 
             begin
 
-              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]      //»úÆ÷ÉÏÃ»ÓĞ¹¤¼ş£¨ÂÖµ½ÁË»úÆ÷ÉÏ×îºóÒ»¸ö¹¤ĞòÁË£©
+              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]      //æœºå™¨ä¸Šæ²¡æœ‰å·¥ä»¶ï¼ˆè½®åˆ°äº†æœºå™¨ä¸Šæœ€åä¸€ä¸ªå·¥åºäº†ï¼‰
                  - machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k - 1 , 2 ] < 0
 
               then
@@ -3867,7 +3867,7 @@ begin
 
                   FC_arr [ 1 ] := FC_arr [ j ] ;
 
-                  F := temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;            //Ñ¡¶¨ÓµÓĞ×îĞ¡Íê¹¤Ê±¼äµÄ»úÆ÷
+                  F := temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;            //é€‰å®šæ‹¥æœ‰æœ€å°å®Œå·¥æ—¶é—´çš„æœºå™¨
 
                   FP := temp_P_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] ;
 
@@ -3876,7 +3876,7 @@ begin
                 end;
               end ;
 
-              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]    //»úÆ÷ÉÏÓĞ¹¤¼ş£¨»¹Ã»ÂÖµ½»úÆ÷ÉÏ×îºóÒ»¸ö¹¤Ğò£©
+              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k , 1 ]    //æœºå™¨ä¸Šæœ‰å·¥ä»¶ï¼ˆè¿˜æ²¡è½®åˆ°æœºå™¨ä¸Šæœ€åä¸€ä¸ªå·¥åºï¼‰
                  - machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] , k - 1 , 2 ] >= 0
 
               then
@@ -3897,7 +3897,7 @@ begin
 
       until ( temp_M_mt_arr1 [ temp_o_arr [ i ] , 1 , j ] = 0 ) or ( j = 4 );
 
-      if insert_flag = true then                                                  //ÓĞÇ°²å¿Õ¼äÊ±Ñ¡Ôñ»úÆ÷
+      if insert_flag = true then                                                  //æœ‰å‰æ’ç©ºé—´æ—¶é€‰æ‹©æœºå™¨
 
       begin
 
@@ -3938,7 +3938,7 @@ begin
 
           for x := Ek to 35 do
 
-          begin                                                                   //¢ÛÈ·¶¨»úÆ÷ºó¸Ä±ä»úÆ÷´ÓµÚk¸ö¿ªÊ¼Ë³ÑÓµÄ¼Ó¹¤¹¤¼şµÄ¿ªÊ¼½áÊøÊ±¼ä
+          begin                                                                   //â‘¢ç¡®å®šæœºå™¨åæ”¹å˜æœºå™¨ä»ç¬¬kä¸ªå¼€å§‹é¡ºå»¶çš„åŠ å·¥å·¥ä»¶çš„å¼€å§‹ç»“æŸæ—¶é—´
 
             machine_pro_pos [ M_arr [ i ] , x + 1 , 1 ]
             := machine_pro_pos1 [ M_arr [ i ] , x , 1 ] ;
@@ -3957,11 +3957,11 @@ begin
 
           end;
 
-          machine_pro_pos [ M_arr [ i ] , Ek , 1 ] := 0 ;                         //¢Ü¸üĞÂ»úÆ÷jµÚk¸öµÄ¼Ó¹¤¹¤Ğò¿ªÊ¼½áÊøÊ±¼ä
+          machine_pro_pos [ M_arr [ i ] , Ek , 1 ] := 0 ;                         //â‘£æ›´æ–°æœºå™¨jç¬¬kä¸ªçš„åŠ å·¥å·¥åºå¼€å§‹ç»“æŸæ—¶é—´
 
           machine_pro_pos [ M_arr [ i ] , Ek , 2 ] := EP ;
 
-          job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 1 ] := 0 ;                //¢İ¸üĞÂ¹¤¼şiµÚÒ»µÀ¹¤ĞòµÄ¼Ó¹¤Íê³ÉÊ±¼ä
+          job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 1 ] := 0 ;                //â‘¤æ›´æ–°å·¥ä»¶iç¬¬ä¸€é“å·¥åºçš„åŠ å·¥å®Œæˆæ—¶é—´
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 2 ] := Ep ;
 
@@ -4000,7 +4000,7 @@ begin
 
           for x := Ek to 35 do
 
-          begin                                                                   //¢ÛÈ·¶¨»úÆ÷ºó¸Ä±ä»úÆ÷´ÓµÚk¸ö¿ªÊ¼Ë³ÑÓµÄ¼Ó¹¤¹¤¼şµÄ¿ªÊ¼½áÊøÊ±¼ä
+          begin                                                                   //â‘¢ç¡®å®šæœºå™¨åæ”¹å˜æœºå™¨ä»ç¬¬kä¸ªå¼€å§‹é¡ºå»¶çš„åŠ å·¥å·¥ä»¶çš„å¼€å§‹ç»“æŸæ—¶é—´
 
             machine_pro_pos [ M_arr [ i ] , x + 1 , 1 ]
             := machine_pro_pos1 [ M_arr [ i ] , x , 1 ] ;
@@ -4020,13 +4020,13 @@ begin
           end;
 
           machine_pro_pos [ M_arr [ i ] , Ek , 1 ]
-          := machine_pro_pos [ M_arr [ i ] , Ek - 1 , 2 ] ;                       //¢Ü¸üĞÂ»úÆ÷jµÚk¸öµÄ¼Ó¹¤¹¤Ğò¿ªÊ¼½áÊøÊ±¼ä
+          := machine_pro_pos [ M_arr [ i ] , Ek - 1 , 2 ] ;                       //â‘£æ›´æ–°æœºå™¨jç¬¬kä¸ªçš„åŠ å·¥å·¥åºå¼€å§‹ç»“æŸæ—¶é—´
 
           machine_pro_pos [ M_arr [ i ] , Ek , 2 ]
           := machine_pro_pos [ M_arr [ i ] , Ek - 1 , 2 ] + Ep ;
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 1 ]
-          := machine_pro_pos [ M_arr [ i ] , Ek - 1 , 2 ] ;                       //¢İ¸üĞÂ¹¤¼şiµÚÒ»µÀ¹¤ĞòµÄ¼Ó¹¤Íê³ÉÊ±¼ä
+          := machine_pro_pos [ M_arr [ i ] , Ek - 1 , 2 ] ;                       //â‘¤æ›´æ–°å·¥ä»¶iç¬¬ä¸€é“å·¥åºçš„åŠ å·¥å®Œæˆæ—¶é—´
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 2 ]
           :=  machine_pro_pos [ M_arr [ i ] , Ek - 1 , 2 ] + Ep ;
@@ -4041,7 +4041,7 @@ begin
 
       end ;
 
-      if insert_flag = false then                                                 //ÎŞÇ°²å¿Õ¼äÊ±Ñ¡Ôñ»úÆ÷
+      if insert_flag = false then                                                 //æ— å‰æ’ç©ºé—´æ—¶é€‰æ‹©æœºå™¨
 
       begin
 
@@ -4055,11 +4055,11 @@ begin
 
         begin
 
-          machine_pro_pos [ M_arr [ i ] , Fk , 1 ] := 0 ;                       //¢Ü¸üĞÂ»úÆ÷jµÚk¸öµÄ¼Ó¹¤¹¤Ğò¿ªÊ¼½áÊøÊ±¼ä
+          machine_pro_pos [ M_arr [ i ] , Fk , 1 ] := 0 ;                       //â‘£æ›´æ–°æœºå™¨jç¬¬kä¸ªçš„åŠ å·¥å·¥åºå¼€å§‹ç»“æŸæ—¶é—´
 
           machine_pro_pos [ M_arr [ i ] , Fk , 2 ] := FP ;
 
-          job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 1 ] := 0 ;                  //¢İ¸üĞÂ¹¤¼şiµÚÒ»µÀ¹¤ĞòµÄ¼Ó¹¤Íê³ÉÊ±¼ä
+          job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 1 ] := 0 ;                  //â‘¤æ›´æ–°å·¥ä»¶iç¬¬ä¸€é“å·¥åºçš„åŠ å·¥å®Œæˆæ—¶é—´
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 2 ] := FP ;
 
@@ -4076,13 +4076,13 @@ begin
         begin
 
           machine_pro_pos [ M_arr [ i ] , Fk , 1 ]
-          := machine_pro_pos [ M_arr [ i ] , Fk - 1 , 2 ] ;                        //¢Ü¸üĞÂ»úÆ÷jµÚk¸öµÄ¼Ó¹¤¹¤Ğò¿ªÊ¼½áÊøÊ±¼ä
+          := machine_pro_pos [ M_arr [ i ] , Fk - 1 , 2 ] ;                        //â‘£æ›´æ–°æœºå™¨jç¬¬kä¸ªçš„åŠ å·¥å·¥åºå¼€å§‹ç»“æŸæ—¶é—´
 
           machine_pro_pos [ M_arr [ i ] , Fk , 2 ]
           := machine_pro_pos [ M_arr [ i ] , Fk , 1 ] + FP ;
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 1 ]
-          := machine_pro_pos [ M_arr [ i ] , Fk - 1 , 2 ]  ;                       //¢İ¸üĞÂ¹¤¼şiµÚÒ»µÀ¹¤ĞòµÄ¼Ó¹¤Íê³ÉÊ±¼ä
+          := machine_pro_pos [ M_arr [ i ] , Fk - 1 , 2 ]  ;                       //â‘¤æ›´æ–°å·¥ä»¶iç¬¬ä¸€é“å·¥åºçš„åŠ å·¥å®Œæˆæ—¶é—´
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 2 ]
           := machine_pro_pos [ M_arr [ i ] , Fk , 1 ] + FP ;
@@ -4099,7 +4099,7 @@ begin
 
     end ;
 
-    if job_count_arr [ temp_o_arr [ i ] ] > 1 then                              //Èç¹û²»ÊÇ¹¤¼şµÄµÚÒ»¸ö¹¤Ğò
+    if job_count_arr [ temp_o_arr [ i ] ] > 1 then                              //å¦‚æœä¸æ˜¯å·¥ä»¶çš„ç¬¬ä¸€ä¸ªå·¥åº
 
     begin
 
@@ -4111,11 +4111,11 @@ begin
 
         repeat
 
-          if K = 1 then                                                         //»úÆ÷ÉÏµÚÒ»¸ö¼Ó¹¤
+          if K = 1 then                                                         //æœºå™¨ä¸Šç¬¬ä¸€ä¸ªåŠ å·¥
 
           begin
 
-            if job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]        //ÓĞÇ°²å¿Õ¼ä
+            if job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]        //æœ‰å‰æ’ç©ºé—´
                + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
                                     temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ]
                + temp_P_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ]
@@ -4126,10 +4126,10 @@ begin
 
             begin
 
-              insert_flag := True ;                                             //¢Ù¸Ä±äÇ°²å±êÊ¶
+              insert_flag := True ;                                             //â‘ æ”¹å˜å‰æ’æ ‡è¯†
 
               EC_arr [ j ]
-              := machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k  , 1 ] ;   //¢Ú±È½Ï²åÈë¿Õ¼ä´óĞ¡
+              := machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k  , 1 ] ;   //â‘¡æ¯”è¾ƒæ’å…¥ç©ºé—´å¤§å°
 
               if EC_arr [ 1 ] = 0 then
 
@@ -4147,16 +4147,16 @@ begin
 
                 EC_arr [ 1 ] := EC_arr [ j ] ;
 
-                E := temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;              //¼ÇÂ¼ÓµÓĞ×îĞ¡Ç°²å¿Õ¼äµÄ»úÆ÷
+                E := temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;              //è®°å½•æ‹¥æœ‰æœ€å°å‰æ’ç©ºé—´çš„æœºå™¨
 
-                EP := temp_P_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;             //¼ÇÂ¼¼Ó¹¤Ê±¼ä
+                EP := temp_P_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;             //è®°å½•åŠ å·¥æ—¶é—´
 
-                Ek := k ;                                                       //¼ÇÂ¼Ç°²åµÄÎ»ÖÃ
+                Ek := k ;                                                       //è®°å½•å‰æ’çš„ä½ç½®
 
               end;
             end;
 
-            if  job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]        //Ã»ÓĞÇ°²å¿Õ¼ä
+            if  job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]        //æ²¡æœ‰å‰æ’ç©ºé—´
                + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
                                     temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ]
                + temp_P_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ]
@@ -4167,7 +4167,7 @@ begin
 
             begin
 
-              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k , 2 ] = 0 then    //µ½ÁË»úÆ÷ÉÏ×îºóÒ»¸ö¹¤Ğò
+              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k , 2 ] = 0 then    //åˆ°äº†æœºå™¨ä¸Šæœ€åä¸€ä¸ªå·¥åº
 
               begin
 
@@ -4183,17 +4183,17 @@ begin
 
                   FC_arr [ 1 ] := FC_arr [ j ] ;
 
-                  F := temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;            //Ñ¡¶¨ÓµÓĞ×îĞ¡Íê¹¤Ê±¼äµÄ»úÆ÷
+                  F := temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;            //é€‰å®šæ‹¥æœ‰æœ€å°å®Œå·¥æ—¶é—´çš„æœºå™¨
 
-                  FP := temp_P_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;           //¼ÇÂ¼¼Ó¹¤Ê±¼ä
+                  FP := temp_P_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;           //è®°å½•åŠ å·¥æ—¶é—´
 
-                  Fk := k ;                                                     //¼ÇÂ¼Î»ÖÃ
+                  Fk := k ;                                                     //è®°å½•ä½ç½®
 
                 end;
 
               end ;
 
-              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k , 2 ] > 0 then     //»úÆ÷ÉÏÓĞ¹¤¼ş£¨»¹Ã»ÂÖµ½»úÆ÷ÉÏ×îºóÒ»¸ö¹¤Ğò£©
+              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k , 2 ] > 0 then     //æœºå™¨ä¸Šæœ‰å·¥ä»¶ï¼ˆè¿˜æ²¡è½®åˆ°æœºå™¨ä¸Šæœ€åä¸€ä¸ªå·¥åºï¼‰
 
               begin
 
@@ -4205,11 +4205,11 @@ begin
 
           end ;
 
-          if K > 1 then                                                         //»úÆ÷ÉÏ²»ÊÇµÚÒ»¸ö¼Ó¹¤
+          if K > 1 then                                                         //æœºå™¨ä¸Šä¸æ˜¯ç¬¬ä¸€ä¸ªåŠ å·¥
 
           begin
 
-            if  Max ( job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]        //ÓĞÇ°²å¿Õ¼ä
+            if  Max ( job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]        //æœ‰å‰æ’ç©ºé—´
                       + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
                                     temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ] ,
                       machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k - 1 , 2 ] )
@@ -4220,9 +4220,9 @@ begin
             then
 
             begin
-              insert_flag := True ;                                             //¢Ù¸Ä±äÇ°²å±êÊ¶
+              insert_flag := True ;                                             //â‘ æ”¹å˜å‰æ’æ ‡è¯†
 
-              EC_arr [ j ] := machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k  , 1 ]    //¢Ú±È½Ï²åÈë¿Õ¼ä´óĞ¡
+              EC_arr [ j ] := machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k  , 1 ]    //â‘¡æ¯”è¾ƒæ’å…¥ç©ºé—´å¤§å°
                            - machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k - 1 , 2 ] ;
 
               if EC_arr [ 1 ] = 0 then
@@ -4233,7 +4233,7 @@ begin
 
               end;
 
-              if EC_arr [ j ] <= EC_arr [ 1 ]  then                              //Ñ¡²åÈë¿Õ¼ä×îĞ¡µÄ
+              if EC_arr [ j ] <= EC_arr [ 1 ]  then                              //é€‰æ’å…¥ç©ºé—´æœ€å°çš„
 
               begin
 
@@ -4241,16 +4241,16 @@ begin
 
                 EC_arr [ 1 ] := EC_arr [ j ] ;
 
-                E := temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;        //¼ÇÂ¼ÓµÓĞ×îĞ¡Ç°²å¿Õ¼äµÄ»úÆ÷
+                E := temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;        //è®°å½•æ‹¥æœ‰æœ€å°å‰æ’ç©ºé—´çš„æœºå™¨
 
-                Ep := temp_P_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;       //¼ÇÂ¼¼Ó¹¤Ê±¼ä
+                Ep := temp_P_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;       //è®°å½•åŠ å·¥æ—¶é—´
 
-                EK := k ;                                                       //¼ÇÂ¼Ç°²åµÄÎ»ÖÃ
+                EK := k ;                                                       //è®°å½•å‰æ’çš„ä½ç½®
 
               end ;
             end;
 
-            if   Max ( job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]        //Ã»ÓĞÇ°²å¿Õ¼ä
+            if   Max ( job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]        //æ²¡æœ‰å‰æ’ç©ºé—´
                       + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
                                     temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ] ,
                       machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k - 1 , 2 ] )
@@ -4262,7 +4262,7 @@ begin
 
             begin
 
-              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k , 1 ]      //»úÆ÷ÉÏÃ»ÓĞ¹¤¼ş£¨ÂÖµ½ÁË»úÆ÷ÉÏ×îºóÒ»¸ö¹¤ĞòÁË£©
+              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k , 1 ]      //æœºå™¨ä¸Šæ²¡æœ‰å·¥ä»¶ï¼ˆè½®åˆ°äº†æœºå™¨ä¸Šæœ€åä¸€ä¸ªå·¥åºäº†ï¼‰
                  - machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k - 1 , 2 ] < 0
 
               then
@@ -4282,7 +4282,7 @@ begin
 
                   FC_arr [ 1 ] := FC_arr [ j ] ;
 
-                  F := temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;            //Ñ¡¶¨ÓµÓĞ×îĞ¡Íê¹¤Ê±¼äµÄ»úÆ÷
+                  F := temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;            //é€‰å®šæ‹¥æœ‰æœ€å°å®Œå·¥æ—¶é—´çš„æœºå™¨
 
                   FP := temp_P_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] ;
 
@@ -4291,7 +4291,7 @@ begin
                 end;
               end ;
 
-              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k , 1 ]    //»úÆ÷ÉÏÓĞ¹¤¼ş£¨»¹Ã»ÂÖµ½»úÆ÷ÉÏ×îºóÒ»¸ö¹¤Ğò£©
+              if machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k , 1 ]    //æœºå™¨ä¸Šæœ‰å·¥ä»¶ï¼ˆè¿˜æ²¡è½®åˆ°æœºå™¨ä¸Šæœ€åä¸€ä¸ªå·¥åºï¼‰
 
                  - machine_pro_pos [ temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] , k - 1 , 2 ] >= 0
 
@@ -4313,7 +4313,7 @@ begin
 
       until ( temp_M_mt_arr1 [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , j ] = 0 ) or  ( j = 4 ) ;
 
-      if insert_flag = True then                                                //¿ÉÑ¡»úÆ÷ÄÚÓĞ¿ÉÇ°²åµÄ
+      if insert_flag = True then                                                //å¯é€‰æœºå™¨å†…æœ‰å¯å‰æ’çš„
       begin
 
         M_arr [ i ] := E ;
@@ -4349,7 +4349,7 @@ begin
 
           for x := Ek to 35 do
 
-          begin                                                                   //¢ÛÈ·¶¨»úÆ÷ºó¸Ä±ä»úÆ÷´ÓµÚk¸ö¿ªÊ¼Ë³ÑÓµÄ¼Ó¹¤¹¤¼şµÄ¿ªÊ¼½áÊøÊ±¼ä
+          begin                                                                   //â‘¢ç¡®å®šæœºå™¨åæ”¹å˜æœºå™¨ä»ç¬¬kä¸ªå¼€å§‹é¡ºå»¶çš„åŠ å·¥å·¥ä»¶çš„å¼€å§‹ç»“æŸæ—¶é—´
 
             machine_pro_pos [ M_arr [ i ] , x + 1 , 1 ]
             := machine_pro_pos1 [ M_arr [ i ] , x , 1 ] ;
@@ -4370,13 +4370,13 @@ begin
 
           machine_pro_pos [ M_arr [ i ] , Ek , 1 ] := job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]
                + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
-                                    M_arr [ i ] ] ;            //¢Ü¸üĞÂ»úÆ÷jµÚk¸öµÄ¼Ó¹¤¹¤Ğò¿ªÊ¼½áÊøÊ±¼ä
+                                    M_arr [ i ] ] ;            //â‘£æ›´æ–°æœºå™¨jç¬¬kä¸ªçš„åŠ å·¥å·¥åºå¼€å§‹ç»“æŸæ—¶é—´
 
           machine_pro_pos [ M_arr [ i ] , Ek , 2 ] :=  machine_pro_pos [ M_arr [ i ] , Ek , 1 ] + EP ;
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 1 ] := job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]
                + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
-                                    M_arr [ i ] ] ;                //¢İ¸üĞÂ¹¤¼şiµÚÒ»µÀ¹¤ĞòµÄ¼Ó¹¤Íê³ÉÊ±¼ä
+                                    M_arr [ i ] ] ;                //â‘¤æ›´æ–°å·¥ä»¶iç¬¬ä¸€é“å·¥åºçš„åŠ å·¥å®Œæˆæ—¶é—´
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 2 ] := machine_pro_pos [ M_arr [ i ] , Ek , 1 ] + Ep ;
 
@@ -4415,7 +4415,7 @@ begin
 
           for x := Ek to 35 do
 
-          begin                                                                   //¢ÛÈ·¶¨»úÆ÷ºó¸Ä±ä»úÆ÷´ÓµÚk¸ö¿ªÊ¼Ë³ÑÓµÄ¼Ó¹¤¹¤¼şµÄ¿ªÊ¼½áÊøÊ±¼ä
+          begin                                                                   //â‘¢ç¡®å®šæœºå™¨åæ”¹å˜æœºå™¨ä»ç¬¬kä¸ªå¼€å§‹é¡ºå»¶çš„åŠ å·¥å·¥ä»¶çš„å¼€å§‹ç»“æŸæ—¶é—´
 
             machine_pro_pos [ M_arr [ i ] , x + 1 , 1 ]
             := machine_pro_pos1 [ M_arr [ i ] , x , 1 ] ;
@@ -4438,7 +4438,7 @@ begin
           := Max( machine_pro_pos [ M_arr [ i ] , Ek - 1 , 2 ] ,
                   job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]
                   + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
-                                    M_arr [ i ] ] ) ;                       //¢Ü¸üĞÂ»úÆ÷jµÚk¸öµÄ¼Ó¹¤¹¤Ğò¿ªÊ¼½áÊøÊ±¼ä
+                                    M_arr [ i ] ] ) ;                       //â‘£æ›´æ–°æœºå™¨jç¬¬kä¸ªçš„åŠ å·¥å·¥åºå¼€å§‹ç»“æŸæ—¶é—´
 
           machine_pro_pos [ M_arr [ i ] , Ek , 2 ]
           := machine_pro_pos [ M_arr [ i ] , Ek , 1 ] + Ep ;
@@ -4447,7 +4447,7 @@ begin
           :=  Max( machine_pro_pos [ M_arr [ i ] , Ek - 1 , 2 ] ,
                   job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]
                   + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
-                                    M_arr [ i ] ] ) ;                       //¢İ¸üĞÂ¹¤¼şiµÚÒ»µÀ¹¤ĞòµÄ¼Ó¹¤Íê³ÉÊ±¼ä
+                                    M_arr [ i ] ] ) ;                       //â‘¤æ›´æ–°å·¥ä»¶iç¬¬ä¸€é“å·¥åºçš„åŠ å·¥å®Œæˆæ—¶é—´
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 2 ]
           :=  machine_pro_pos [ M_arr [ i ] , Ek , 1 ] + Ep ;
@@ -4462,7 +4462,7 @@ begin
 
       end ;
 
-      if insert_flag = false then                                                //¿ÉÑ¡»úÆ÷ÄÚÓĞ¿ÉÇ°²åµÄ
+      if insert_flag = false then                                                //å¯é€‰æœºå™¨å†…æœ‰å¯å‰æ’çš„
 
       begin
 
@@ -4478,13 +4478,13 @@ begin
 
           machine_pro_pos [ M_arr [ i ] , Fk , 1 ] := job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]
                + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
-                                    M_arr [ i ] ] ;                       //¢Ü¸üĞÂ»úÆ÷jµÚk¸öµÄ¼Ó¹¤¹¤Ğò¿ªÊ¼½áÊøÊ±¼ä
+                                    M_arr [ i ] ] ;                       //â‘£æ›´æ–°æœºå™¨jç¬¬kä¸ªçš„åŠ å·¥å·¥åºå¼€å§‹ç»“æŸæ—¶é—´
 
           machine_pro_pos [ M_arr [ i ] , Fk , 2 ] := machine_pro_pos [ M_arr [ i ] , Fk , 1 ] + FP ;
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 1 ] := job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]
                + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
-                                    M_arr [ i ] ] ;                  //¢İ¸üĞÂ¹¤¼şiµÚÒ»µÀ¹¤ĞòµÄ¼Ó¹¤Íê³ÉÊ±¼ä
+                                    M_arr [ i ] ] ;                  //â‘¤æ›´æ–°å·¥ä»¶iç¬¬ä¸€é“å·¥åºçš„åŠ å·¥å®Œæˆæ—¶é—´
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 2 ] := machine_pro_pos [ M_arr [ i ] , Fk , 1 ] + FP ;
 
@@ -4504,7 +4504,7 @@ begin
           := Max( machine_pro_pos [ M_arr [ i ] , Fk - 1 , 2 ] ,
                   job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]
                   + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
-                                    M_arr [ i ] ] )  ;                       //¢Ü¸üĞÂ»úÆ÷jµÚk¸öµÄ¼Ó¹¤¹¤Ğò¿ªÊ¼½áÊøÊ±¼ä
+                                    M_arr [ i ] ] )  ;                       //â‘£æ›´æ–°æœºå™¨jç¬¬kä¸ªçš„åŠ å·¥å·¥åºå¼€å§‹ç»“æŸæ—¶é—´
 
           machine_pro_pos [ M_arr [ i ] , Fk , 2 ]
           := machine_pro_pos [ M_arr [ i ] , Fk , 1 ] + FP ;
@@ -4513,7 +4513,7 @@ begin
           := Max( machine_pro_pos [ M_arr [ i ] , Fk - 1 , 2 ] ,
                   job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 , 2 ]
                   + temp_setup1_time [ job_M [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] - 1 ] ,
-                                    M_arr [ i ] ] ) ;                       //¢İ¸üĞÂ¹¤¼şiµÚnµÀ¹¤ĞòµÄ¼Ó¹¤Íê³ÉÊ±¼ä
+                                    M_arr [ i ] ] ) ;                       //â‘¤æ›´æ–°å·¥ä»¶iç¬¬né“å·¥åºçš„åŠ å·¥å®Œæˆæ—¶é—´
 
           job_Ctime [ temp_o_arr [ i ] , job_count_arr [ temp_o_arr [ i ] ] , 2 ]
           := machine_pro_pos [ M_arr [ i ] , Fk , 1 ] + FP ;
@@ -4665,7 +4665,7 @@ begin
     
   end;
 
- /////////////////////³õÊ¼»¯»úÆ÷×ÊÔ´Êı×é/////////////////////////////////////
+ /////////////////////åˆå§‹åŒ–æœºå™¨èµ„æºæ•°ç»„/////////////////////////////////////
 
   for i := 1 to 240 do
 
@@ -4699,46 +4699,46 @@ begin
 
   end;
 
-////////////////////////////////////////////////                                ¼ÓÉÏ×ÊÔ´Ô¼Êø¼ÆËãÍê¹¤Ê±¼ä
+////////////////////////////////////////////////                                åŠ ä¸Šèµ„æºçº¦æŸè®¡ç®—å®Œå·¥æ—¶é—´
 
   for i := 1 to max_i do
 
   begin
 
-    count_op [ OMP.op_arr [ i ] ] := count_op [ OMP.op_arr [ i ] ] + 1 ;        //¹¤Ğò+1
+    count_op [ OMP.op_arr [ i ] ] := count_op [ OMP.op_arr [ i ] ] + 1 ;        //å·¥åº+1
 
-    count_ma [ OMP.ma_arr [ i ] ] := count_ma [ OMP.ma_arr [ i ] ] + 1 ;        //»úÆ÷¼Ó¹¤Î»ÖÃ+1
+    count_ma [ OMP.ma_arr [ i ] ] := count_ma [ OMP.ma_arr [ i ] ] + 1 ;        //æœºå™¨åŠ å·¥ä½ç½®+1
 
     min_mac := 0 ; min_mac1 := 0 ; min_mac2 := 0 ; min_mac3 := 0 ;
 
     fillchar ( young_arr , sizeof ( two_arr3 ) , 0 ) ;
 
-    if count_ma [ OMP.ma_arr [ i ] ] = 1 then                                   //»úÆ÷µÚÒ»¸öÎ»ÖÃ¼Ó¹¤
+    if count_ma [ OMP.ma_arr [ i ] ] = 1 then                                   //æœºå™¨ç¬¬ä¸€ä¸ªä½ç½®åŠ å·¥
 
     begin
 
-      if count_op [ OMP.op_arr [ i ] ] = 1 then                                 //¹¤¼şµÚÒ»¸ö¹¤Ğò
+      if count_op [ OMP.op_arr [ i ] ] = 1 then                                 //å·¥ä»¶ç¬¬ä¸€ä¸ªå·¥åº
 
       begin
 
         if   ( t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] > 0 )
-         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )     //×ÊÔ´³ä×ãÊ±
+         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )     //èµ„æºå……è¶³æ—¶
          and ( t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] > 0 )
         then
 
         begin
 
-          op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] := OMP.pr_arr [ i ] ;               //Íê¹¤Ê±¼ä
+          op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] := OMP.pr_arr [ i ] ;               //å®Œå·¥æ—¶é—´
 
-          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] := 0 ;  //
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
           := OMP.pr_arr [ i ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -4755,12 +4755,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -4956,16 +4956,16 @@ begin
 
            op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] := OMP.pr_arr [ i ] + min_time ;
 
-           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                          //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                          //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
            job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
            := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -5002,7 +5002,7 @@ begin
               begin
 
                 t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ]
-                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ÈıÖÖ×ÊÔ´¸÷¼ÓÒ»
+                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ä¸‰ç§èµ„æºå„åŠ ä¸€
 
               end;
 
@@ -5025,12 +5025,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -5042,12 +5042,12 @@ begin
 
       end
 
-      else if count_op [ OMP.op_arr [ i ] ] = 2 then                            //»úÆ÷µÚÒ»¸öÎ»ÖÃ¼Ó¹¤£¬¹¤¼şµÚ¶ş¸ö¹¤Ğò
+      else if count_op [ OMP.op_arr [ i ] ] = 2 then                            //æœºå™¨ç¬¬ä¸€ä¸ªä½ç½®åŠ å·¥ï¼Œå·¥ä»¶ç¬¬äºŒä¸ªå·¥åº
 
       begin
 
         if   ( t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] > 0 )
-         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //×ÊÔ´³ä×ãÊ±
+         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //èµ„æºå……è¶³æ—¶
          and ( t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] > 0 )
         then
 
@@ -5055,18 +5055,18 @@ begin
 
           op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ]
           := OMP.pr_arr [ i ] + op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ]
-             + temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ;                        //Íê¹¤Ê±¼ä
+             + temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ;                        //å®Œå·¥æ—¶é—´
 
-          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] -  OMP.pr_arr [ i ] ;  //
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -5083,13 +5083,13 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -5289,16 +5289,16 @@ begin
            op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ] +
            temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ) ;
 
-           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -5335,7 +5335,7 @@ begin
               begin
 
                 t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ]
-                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ÈıÖÖ×ÊÔ´¸÷¼ÓÒ»
+                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ä¸‰ç§èµ„æºå„åŠ ä¸€
 
               end;
 
@@ -5358,12 +5358,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -5375,12 +5375,12 @@ begin
 
       end
 
-      else if count_op [ OMP.op_arr [ i ] ] = 3 then                            //»úÆ÷µÚÒ»¸öÎ»ÖÃ¼Ó¹¤£¬¹¤¼şµÚÈı¸ö¹¤Ğò
+      else if count_op [ OMP.op_arr [ i ] ] = 3 then                            //æœºå™¨ç¬¬ä¸€ä¸ªä½ç½®åŠ å·¥ï¼Œå·¥ä»¶ç¬¬ä¸‰ä¸ªå·¥åº
 
       begin
 
         if   ( t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] > 0 )
-         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //×ÊÔ´³ä×ãÊ±
+         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //èµ„æºå……è¶³æ—¶
          and ( t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] > 0 )
         then
 
@@ -5388,18 +5388,18 @@ begin
 
           op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ]
           := OMP.pr_arr [ i ] + op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ]
-             + temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ;                        //Íê¹¤Ê±¼ä
+             + temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ;                        //å®Œå·¥æ—¶é—´
 
-          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]                 //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                                  //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                                  //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;             //
 
@@ -5416,12 +5416,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -5620,16 +5620,16 @@ begin
            op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ] +
            temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ) ;
 
-           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
            job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
            := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -5666,7 +5666,7 @@ begin
               begin
 
                 t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ]
-                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ÈıÖÖ×ÊÔ´¸÷¼ÓÒ»
+                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ä¸‰ç§èµ„æºå„åŠ ä¸€
 
               end;
 
@@ -5689,12 +5689,12 @@ begin
            := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
            t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-           := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+           := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
            t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
            := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-           if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+           if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
            begin
 
@@ -5707,33 +5707,33 @@ begin
       end ;
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     end
-    else                                   //²»ÊÇÔÚ»úÆ÷µÚÒ»Î»¹¤Ğò¼Ó¹¤
+    else                                   //ä¸æ˜¯åœ¨æœºå™¨ç¬¬ä¸€ä½å·¥åºåŠ å·¥
 
     begin
 
-      if count_op [ OMP.op_arr [ i ] ] = 1 then                                 //¹¤¼şµÚÒ»¸ö¹¤Ğò
+      if count_op [ OMP.op_arr [ i ] ] = 1 then                                 //å·¥ä»¶ç¬¬ä¸€ä¸ªå·¥åº
 
       begin
 
         if   ( t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] > 0 )
-         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //×ÊÔ´³ä×ãÊ±
+         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //èµ„æºå……è¶³æ—¶
          and ( t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] > 0 )
         then
 
         begin
 
-          op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] := OMP.pr_arr [ i ] + m_final [ OMP.ma_arr [ i ] ] ;          //Íê¹¤Ê±¼ä
+          op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] := OMP.pr_arr [ i ] + m_final [ OMP.ma_arr [ i ] ] ;          //å®Œå·¥æ—¶é—´
 
-          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] -  OMP.pr_arr [ i ] ;  //
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -5750,12 +5750,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -5951,16 +5951,16 @@ begin
            op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] := OMP.pr_arr [ i ]
            + max ( min_time , m_final [ OMP.ma_arr [ i ] ] ) ;
 
-           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -5997,7 +5997,7 @@ begin
               begin
 
                 t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ]
-                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ÈıÖÖ×ÊÔ´¸÷¼ÓÒ»
+                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ä¸‰ç§èµ„æºå„åŠ ä¸€
 
               end;
 
@@ -6020,12 +6020,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -6036,12 +6036,12 @@ begin
         end ;
 
       end
-      else if count_op [ OMP.op_arr [ i ] ] = 2 then                            //²»ÊÇ»úÆ÷µÚÒ»¸öÎ»ÖÃ¼Ó¹¤£¬¹¤¼şµÚ¶ş¸ö¹¤Ğò
+      else if count_op [ OMP.op_arr [ i ] ] = 2 then                            //ä¸æ˜¯æœºå™¨ç¬¬ä¸€ä¸ªä½ç½®åŠ å·¥ï¼Œå·¥ä»¶ç¬¬äºŒä¸ªå·¥åº
 
       begin
 
         if   ( t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] > 0 )
-         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //×ÊÔ´³ä×ãÊ±
+         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //èµ„æºå……è¶³æ—¶
          and ( t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] > 0 )
         then
 
@@ -6050,18 +6050,18 @@ begin
           op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ]
           := OMP.pr_arr [ i ] + max ( op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ]
              + temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ,
-               m_final [ OMP.ma_arr [ i ] ] ) ;                                 //Íê¹¤Ê±¼ä
+               m_final [ OMP.ma_arr [ i ] ] ) ;                                 //å®Œå·¥æ—¶é—´
 
-          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] -  OMP.pr_arr [ i ] ;  //
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -6078,12 +6078,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -6283,16 +6283,16 @@ begin
            op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ] +
            temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ) ,  m_final [ OMP.ma_arr [ i ] ] ) ;
 
-           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -6329,7 +6329,7 @@ begin
               begin
 
                 t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ]
-                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ÈıÖÖ×ÊÔ´¸÷¼ÓÒ»
+                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ä¸‰ç§èµ„æºå„åŠ ä¸€
 
               end;
 
@@ -6352,12 +6352,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -6371,12 +6371,12 @@ begin
 
       else
 
-      if count_op [ OMP.op_arr [ i ] ] = 3 then                            //»úÆ÷·ÇÒ»¸öÎ»ÖÃ¼Ó¹¤£¬¹¤¼şµÚÈı¸ö¹¤Ğò
+      if count_op [ OMP.op_arr [ i ] ] = 3 then                            //æœºå™¨éä¸€ä¸ªä½ç½®åŠ å·¥ï¼Œå·¥ä»¶ç¬¬ä¸‰ä¸ªå·¥åº
 
       begin
 
         if   ( t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] > 0 )
-         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //×ÊÔ´³ä×ãÊ±
+         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //èµ„æºå……è¶³æ—¶
          and ( t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] > 0 )
         then
 
@@ -6385,18 +6385,18 @@ begin
           op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] :=
           OMP.pr_arr [ i ] + max ( op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ]
              + temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ,
-               m_final [ OMP.ma_arr [ i ] ] ) ;                                 //Íê¹¤Ê±¼ä
+               m_final [ OMP.ma_arr [ i ] ] ) ;                                 //å®Œå·¥æ—¶é—´
 
-          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] -  OMP.pr_arr [ i ] ;  //
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -6413,12 +6413,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -6616,16 +6616,16 @@ begin
            op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ] +
            temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ) , m_final [ OMP.ma_arr [ i ] ] ) ;
 
-           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -6662,7 +6662,7 @@ begin
               begin
 
                 t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ]
-                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ÈıÖÖ×ÊÔ´¸÷¼ÓÒ»
+                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ä¸‰ç§èµ„æºå„åŠ ä¸€
 
               end;
 
@@ -6685,12 +6685,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -6728,7 +6728,7 @@ begin
 
     count_xu [ i ] := count_op [ OMP.op_arr [ i ] ] ;
 
-  //////////////////»úÆ÷×ÊÔ´Êı¾İ///////////////////////////////////////
+  //////////////////æœºå™¨èµ„æºæ•°æ®///////////////////////////////////////
 
     tester_matrix [ 2 , start_time [ i ] + 1 ] := t_test [ 1 ] ;
 
@@ -6754,7 +6754,7 @@ begin
 
  ///////////////////////////////////////////////////////////////////////
 
-//////////////¸ÊÌØÍ¼,»úÆ÷×ÊÔ´Í¼Êı¾İ/////////////////////////////////////////////////
+//////////////ç”˜ç‰¹å›¾,æœºå™¨èµ„æºå›¾æ•°æ®/////////////////////////////////////////////////
 
   fitness := m_final [ 1 ] ;
 
@@ -6790,7 +6790,7 @@ begin
 
   end;
 
-//////////////////»úÆ÷×ÊÔ´Êı¾İ///////////////////////////////////////
+//////////////////æœºå™¨èµ„æºæ•°æ®///////////////////////////////////////
 
   sourcetime := sourcetime + 1 ;
   
@@ -6884,7 +6884,7 @@ end ;
 
 procedure calc_fitness_compare ( temp_o_arr , temp_test1 , temp_hand1 , temp_accessory1 : arr ;
                                                           temp_source1_match : two_arr4 ;
-                                                            temp_setup1_time : two_arr1 ;      //»úÆ÷ĞòÁĞÑ°ÓÅ
+                                                            temp_setup1_time : two_arr1 ;      //æœºå™¨åºåˆ—å¯»ä¼˜
                                             temp_M_mt_arr1 , temp_P_mt_arr1 : three_arr ;
                                                                    var  o11_arr : arr ;
                                                                    var  m11_arr : arr ;
@@ -6910,9 +6910,9 @@ var
 
   ///////////compare///////////////
 
-  op_num , job_makespan , mac_makespan , mac , complete , protime: arr ;     //¹¤Ğò£¬¹¤¼şÍê¹¤Ê±¼ä£¬»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä ,»úÆ÷£¬Íê¹¤Ê±¼ä£¬¼Ó¹¤Ê±¼ä£¬
-  op_select_mac : two_arr2 ;                       //¹¤ĞòÑ¡Ôñ¼Ó¹¤µÄ»úÆ÷
-  mac_select : Integer ;           //»úÆ÷Ñ¡Ôñ
+  op_num , job_makespan , mac_makespan , mac , complete , protime: arr ;     //å·¥åºï¼Œå·¥ä»¶å®Œå·¥æ—¶é—´ï¼Œæœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´ ,æœºå™¨ï¼Œå®Œå·¥æ—¶é—´ï¼ŒåŠ å·¥æ—¶é—´ï¼Œ
+  op_select_mac : two_arr2 ;                       //å·¥åºé€‰æ‹©åŠ å·¥çš„æœºå™¨
+  mac_select : Integer ;           //æœºå™¨é€‰æ‹©
 
   ///////////compare///////////////
 
@@ -6944,9 +6944,9 @@ begin
 
   begin
 
-    op_num [ temp_o_arr [ i ] ] := op_num [ temp_o_arr [ i ] ] + 1 ;   //¹¤Ğò+1
+    op_num [ temp_o_arr [ i ] ] := op_num [ temp_o_arr [ i ] ] + 1 ;   //å·¥åº+1
 
-    j := 1 ;                                                           //±éÀú¹¤ĞòËùÓĞ¿ÉÑ¡Ôñ¼Ó¹¤»úÆ÷
+    j := 1 ;                                                           //éå†å·¥åºæ‰€æœ‰å¯é€‰æ‹©åŠ å·¥æœºå™¨
 
     fillchar ( complete , sizeof ( arr ) , 0 ) ;
 
@@ -7084,46 +7084,46 @@ begin
     
   end;
 
-////////////////////////////////////////////////                                ¼ÓÉÏ×ÊÔ´Ô¼Êø¼ÆËãÍê¹¤Ê±¼ä
+////////////////////////////////////////////////                                åŠ ä¸Šèµ„æºçº¦æŸè®¡ç®—å®Œå·¥æ—¶é—´
 
   for i := 1 to max_i do
 
   begin
 
-    count_op [ OMP.op_arr [ i ] ] := count_op [ OMP.op_arr [ i ] ] + 1 ;        //¹¤Ğò+1
+    count_op [ OMP.op_arr [ i ] ] := count_op [ OMP.op_arr [ i ] ] + 1 ;        //å·¥åº+1
 
-    count_ma [ OMP.ma_arr [ i ] ] := count_ma [ OMP.ma_arr [ i ] ] + 1 ;        //»úÆ÷¼Ó¹¤Î»ÖÃ+1
+    count_ma [ OMP.ma_arr [ i ] ] := count_ma [ OMP.ma_arr [ i ] ] + 1 ;        //æœºå™¨åŠ å·¥ä½ç½®+1
 
     min_mac := 0 ; min_mac1 := 0 ; min_mac2 := 0 ; min_mac3 := 0 ;
 
     fillchar ( young_arr , sizeof ( two_arr3 ) , 0 ) ;
 
-    if count_ma [ OMP.ma_arr [ i ] ] = 1 then                                   //»úÆ÷µÚÒ»¸öÎ»ÖÃ¼Ó¹¤
+    if count_ma [ OMP.ma_arr [ i ] ] = 1 then                                   //æœºå™¨ç¬¬ä¸€ä¸ªä½ç½®åŠ å·¥
 
     begin
 
-      if count_op [ OMP.op_arr [ i ] ] = 1 then                                 //¹¤¼şµÚÒ»¸ö¹¤Ğò
+      if count_op [ OMP.op_arr [ i ] ] = 1 then                                 //å·¥ä»¶ç¬¬ä¸€ä¸ªå·¥åº
 
       begin
 
         if   ( t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] > 0 )
-         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )     //×ÊÔ´³ä×ãÊ±
+         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )     //èµ„æºå……è¶³æ—¶
          and ( t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] > 0 )
         then
 
         begin
 
-          op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] := OMP.pr_arr [ i ] ;               //Íê¹¤Ê±¼ä
+          op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] := OMP.pr_arr [ i ] ;               //å®Œå·¥æ—¶é—´
 
-          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] := 0 ;  //
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
           := OMP.pr_arr [ i ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -7140,12 +7140,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -7341,16 +7341,16 @@ begin
 
            op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] := OMP.pr_arr [ i ] + min_time ;
 
-           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                          //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                          //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
            job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
            := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -7387,7 +7387,7 @@ begin
               begin
 
                 t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ]
-                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ÈıÖÖ×ÊÔ´¸÷¼ÓÒ»
+                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ä¸‰ç§èµ„æºå„åŠ ä¸€
 
               end;
 
@@ -7410,12 +7410,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -7427,12 +7427,12 @@ begin
 
       end
 
-      else if count_op [ OMP.op_arr [ i ] ] = 2 then                            //»úÆ÷µÚÒ»¸öÎ»ÖÃ¼Ó¹¤£¬¹¤¼şµÚ¶ş¸ö¹¤Ğò
+      else if count_op [ OMP.op_arr [ i ] ] = 2 then                            //æœºå™¨ç¬¬ä¸€ä¸ªä½ç½®åŠ å·¥ï¼Œå·¥ä»¶ç¬¬äºŒä¸ªå·¥åº
 
       begin
 
         if   ( t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] > 0 )
-         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //×ÊÔ´³ä×ãÊ±
+         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //èµ„æºå……è¶³æ—¶
          and ( t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] > 0 )
         then
 
@@ -7440,18 +7440,18 @@ begin
 
           op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ]
           := OMP.pr_arr [ i ] + op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ]
-             + temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ;                        //Íê¹¤Ê±¼ä
+             + temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ;                        //å®Œå·¥æ—¶é—´
 
-          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] -  OMP.pr_arr [ i ] ;  //
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -7468,13 +7468,13 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -7674,16 +7674,16 @@ begin
            op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ] +
            temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ) ;
 
-           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -7720,7 +7720,7 @@ begin
               begin
 
                 t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ]
-                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ÈıÖÖ×ÊÔ´¸÷¼ÓÒ»
+                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ä¸‰ç§èµ„æºå„åŠ ä¸€
 
               end;
 
@@ -7743,12 +7743,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -7760,12 +7760,12 @@ begin
 
       end
 
-      else if count_op [ OMP.op_arr [ i ] ] = 3 then                            //»úÆ÷µÚÒ»¸öÎ»ÖÃ¼Ó¹¤£¬¹¤¼şµÚÈı¸ö¹¤Ğò
+      else if count_op [ OMP.op_arr [ i ] ] = 3 then                            //æœºå™¨ç¬¬ä¸€ä¸ªä½ç½®åŠ å·¥ï¼Œå·¥ä»¶ç¬¬ä¸‰ä¸ªå·¥åº
 
       begin
 
         if   ( t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] > 0 )
-         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //×ÊÔ´³ä×ãÊ±
+         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //èµ„æºå……è¶³æ—¶
          and ( t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] > 0 )
         then
 
@@ -7773,18 +7773,18 @@ begin
 
           op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ]
           := OMP.pr_arr [ i ] + op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ]
-             + temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ;                        //Íê¹¤Ê±¼ä
+             + temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ;                        //å®Œå·¥æ—¶é—´
 
-          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]                 //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                                  //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                                  //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;             //
 
@@ -7801,12 +7801,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -8005,16 +8005,16 @@ begin
            op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ] +
            temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ) ;
 
-           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
            job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
            := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -8051,7 +8051,7 @@ begin
               begin
 
                 t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ]
-                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ÈıÖÖ×ÊÔ´¸÷¼ÓÒ»
+                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ä¸‰ç§èµ„æºå„åŠ ä¸€
 
               end;
 
@@ -8074,12 +8074,12 @@ begin
            := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
            t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-           := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+           := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
            t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
            := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-           if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+           if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
            begin
 
@@ -8092,33 +8092,33 @@ begin
       end ;
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     end
-    else                                   //²»ÊÇÔÚ»úÆ÷µÚÒ»Î»¹¤Ğò¼Ó¹¤
+    else                                   //ä¸æ˜¯åœ¨æœºå™¨ç¬¬ä¸€ä½å·¥åºåŠ å·¥
 
     begin
 
-      if count_op [ OMP.op_arr [ i ] ] = 1 then                                 //¹¤¼şµÚÒ»¸ö¹¤Ğò
+      if count_op [ OMP.op_arr [ i ] ] = 1 then                                 //å·¥ä»¶ç¬¬ä¸€ä¸ªå·¥åº
 
       begin
 
         if   ( t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] > 0 )
-         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //×ÊÔ´³ä×ãÊ±
+         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //èµ„æºå……è¶³æ—¶
          and ( t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] > 0 )
         then
 
         begin
 
-          op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] := OMP.pr_arr [ i ] + m_final [ OMP.ma_arr [ i ] ] ;          //Íê¹¤Ê±¼ä
+          op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] := OMP.pr_arr [ i ] + m_final [ OMP.ma_arr [ i ] ] ;          //å®Œå·¥æ—¶é—´
 
-          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] -  OMP.pr_arr [ i ] ;  //
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -8135,12 +8135,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -8336,16 +8336,16 @@ begin
            op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] := OMP.pr_arr [ i ]
            + max ( min_time , m_final [ OMP.ma_arr [ i ] ] ) ;
 
-           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -8382,7 +8382,7 @@ begin
               begin
 
                 t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ]
-                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ÈıÖÖ×ÊÔ´¸÷¼ÓÒ»
+                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ä¸‰ç§èµ„æºå„åŠ ä¸€
 
               end;
 
@@ -8405,12 +8405,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -8421,12 +8421,12 @@ begin
         end ;
 
       end
-      else if count_op [ OMP.op_arr [ i ] ] = 2 then                            //²»ÊÇ»úÆ÷µÚÒ»¸öÎ»ÖÃ¼Ó¹¤£¬¹¤¼şµÚ¶ş¸ö¹¤Ğò
+      else if count_op [ OMP.op_arr [ i ] ] = 2 then                            //ä¸æ˜¯æœºå™¨ç¬¬ä¸€ä¸ªä½ç½®åŠ å·¥ï¼Œå·¥ä»¶ç¬¬äºŒä¸ªå·¥åº
 
       begin
 
         if   ( t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] > 0 )
-         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //×ÊÔ´³ä×ãÊ±
+         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //èµ„æºå……è¶³æ—¶
          and ( t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] > 0 )
         then
 
@@ -8435,18 +8435,18 @@ begin
           op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ]
           := OMP.pr_arr [ i ] + max ( op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ]
              + temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ,
-               m_final [ OMP.ma_arr [ i ] ] ) ;                                 //Íê¹¤Ê±¼ä
+               m_final [ OMP.ma_arr [ i ] ] ) ;                                 //å®Œå·¥æ—¶é—´
 
-          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] -  OMP.pr_arr [ i ] ;  //
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -8463,12 +8463,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -8668,16 +8668,16 @@ begin
            op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ] +
            temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ) ,  m_final [ OMP.ma_arr [ i ] ] ) ;
 
-           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -8714,7 +8714,7 @@ begin
               begin
 
                 t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ]
-                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ÈıÖÖ×ÊÔ´¸÷¼ÓÒ»
+                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ä¸‰ç§èµ„æºå„åŠ ä¸€
 
               end;
 
@@ -8737,12 +8737,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -8756,12 +8756,12 @@ begin
 
       else
 
-      if count_op [ OMP.op_arr [ i ] ] = 3 then                            //»úÆ÷·ÇÒ»¸öÎ»ÖÃ¼Ó¹¤£¬¹¤¼şµÚÈı¸ö¹¤Ğò
+      if count_op [ OMP.op_arr [ i ] ] = 3 then                            //æœºå™¨éä¸€ä¸ªä½ç½®åŠ å·¥ï¼Œå·¥ä»¶ç¬¬ä¸‰ä¸ªå·¥åº
 
       begin
 
         if   ( t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] > 0 )
-         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //×ÊÔ´³ä×ãÊ±
+         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //èµ„æºå……è¶³æ—¶
          and ( t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] > 0 )
         then
 
@@ -8770,18 +8770,18 @@ begin
           op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] :=
           OMP.pr_arr [ i ] + max ( op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ]
              + temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ,
-               m_final [ OMP.ma_arr [ i ] ] ) ;                                 //Íê¹¤Ê±¼ä
+               m_final [ OMP.ma_arr [ i ] ] ) ;                                 //å®Œå·¥æ—¶é—´
 
-          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] -  OMP.pr_arr [ i ] ;  //
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -8798,12 +8798,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -9001,16 +9001,16 @@ begin
            op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ] +
            temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ) , m_final [ OMP.ma_arr [ i ] ] ) ;
 
-           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -9047,7 +9047,7 @@ begin
               begin
 
                 t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ]
-                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ÈıÖÖ×ÊÔ´¸÷¼ÓÒ»
+                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ä¸‰ç§èµ„æºå„åŠ ä¸€
 
               end;
 
@@ -9070,12 +9070,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -9087,12 +9087,12 @@ begin
 
       end ;
 
-      if count_op [ OMP.op_arr [ i ] ] = 4 then                            //»úÆ÷·ÇÒ»¸öÎ»ÖÃ¼Ó¹¤£¬¹¤¼şµÚËÄ¸ö¹¤Ğò
+      if count_op [ OMP.op_arr [ i ] ] = 4 then                            //æœºå™¨éä¸€ä¸ªä½ç½®åŠ å·¥ï¼Œå·¥ä»¶ç¬¬å››ä¸ªå·¥åº
 
       begin
 
         if   ( t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] > 0 )
-         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //×ÊÔ´³ä×ãÊ±
+         and ( t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] > 0 )    //èµ„æºå……è¶³æ—¶
          and ( t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] > 0 )
         then
 
@@ -9101,18 +9101,18 @@ begin
           op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] :=
           OMP.pr_arr [ i ] + max ( op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ]
              + temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ,
-               m_final [ OMP.ma_arr [ i ] ] ) ;                                 //Íê¹¤Ê±¼ä
+               m_final [ OMP.ma_arr [ i ] ] ) ;                                 //å®Œå·¥æ—¶é—´
 
-          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+          m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+          op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] -  OMP.pr_arr [ i ] ;  //
 
           machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
           := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -9129,12 +9129,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -9332,16 +9332,16 @@ begin
            op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] - 1 ] +
            temp_setup1_time [ op_pos [ OMP.op_arr [ i ] ] , OMP.ma_arr [ i ] ] ) , m_final [ OMP.ma_arr [ i ] ] ) ;
 
-           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //»úÆ÷×îºóÒ»¸ö¹¤¼şÍê¹¤Ê±¼ä
+           m_final [ OMP.ma_arr [ i ] ] := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;   //æœºå™¨æœ€åä¸€ä¸ªå·¥ä»¶å®Œå·¥æ—¶é—´
 
-           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //´Ë¹¤¼ş¼Ó¹¤µÄ»úÆ÷ºÅ
+           op_pos [ OMP.op_arr [ i ] ] := OMP.ma_arr [ i ] ;                     //æ­¤å·¥ä»¶åŠ å·¥çš„æœºå™¨å·
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ]
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] - OMP.pr_arr [ i ] ;  //
 
            machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 2 ]         //
            := op_ctime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] ] ;
-                                                                                         //¸üĞÂ»úÆ÷¾ØÕóºÍ¹¤¼ş¾ØÕó
+                                                                                         //æ›´æ–°æœºå™¨çŸ©é˜µå’Œå·¥ä»¶çŸ©é˜µ
           job_ftime [ OMP.op_arr [ i ] , count_op [ OMP.op_arr [ i ] ] , 1 ]
           := machine_f_pos [ OMP.ma_arr [ i ] , count_ma [ OMP.ma_arr [ i ] ] , 1 ] ;    //
 
@@ -9378,7 +9378,7 @@ begin
               begin
 
                 t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ]
-                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ÈıÖÖ×ÊÔ´¸÷¼ÓÒ»
+                := t_hand [ temp_source1_match [ young_arr [ y , 1 ] , 2 ] ] + 1 ;    //ä¸‰ç§èµ„æºå„åŠ ä¸€
 
               end;
 
@@ -9401,12 +9401,12 @@ begin
           := t_test [ temp_source1_match [ OMP.ma_arr [ i ] , 1 ] ] - 1 ;
 
           t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ]
-          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ÈıÖÖ×ÊÔ´¸÷¼õÒ»
+          := t_hand [ temp_source1_match [ OMP.ma_arr [ i ] , 2 ] ] - 1 ;       //ä¸‰ç§èµ„æºå„å‡ä¸€
 
           t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ]
           := t_acces [ temp_source1_match [ OMP.ma_arr [ i ] , 3 ] ] - 1 ;
 
-          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //½«»úÆ÷·ÅÈëÕıÔÚÔËĞĞ»úÆ÷¼¯ÄÚ
+          if not ( OMP.ma_arr [ i ] in pr_set ) then                            //å°†æœºå™¨æ”¾å…¥æ­£åœ¨è¿è¡Œæœºå™¨é›†å†…
 
           begin
 
@@ -9476,7 +9476,7 @@ begin
 
 end ;
 
-function swap ( var swap_arr : arr ) : arr ;                   //²Ù×÷1£ºËæ»ú½»»»
+function swap ( var swap_arr : arr ) : arr ;                   //æ“ä½œ1ï¼šéšæœºäº¤æ¢
 
 var
   i , j , t : Integer ;
@@ -9501,7 +9501,7 @@ begin
 
 end ;
 
-function adj_swap ( var adj_swap_arr : arr ) : arr ;              //²Ù×÷2£ºÇ°ºó½»»»
+function adj_swap ( var adj_swap_arr : arr ) : arr ;              //æ“ä½œ2ï¼šå‰åäº¤æ¢
 
 var
   i , t : Integer ;
@@ -9520,7 +9520,7 @@ begin
 
 end ;
 
-function pre_insert ( var insert_arr : arr ) : arr ;              //²Ù×÷3£ºÇ°²å
+function pre_insert ( var insert_arr : arr ) : arr ;              //æ“ä½œ3ï¼šå‰æ’
 
 var
   i , u , v , t : integer ;
@@ -9586,7 +9586,7 @@ begin
 
 end;
 
-function post_insert ( var back_insert_arr : arr ) : arr ;         //²Ù×÷4£ººó²å
+function post_insert ( var back_insert_arr : arr ) : arr ;         //æ“ä½œ4ï¼šåæ’
 
 var
   i , u , v , t : integer ;
@@ -9652,7 +9652,7 @@ begin
 
 end;
 
-function binding_swap ( var binding_swap_arr : arr ) : arr ;      //²Ù×÷5£ºÁÚÓò½»»»
+function binding_swap ( var binding_swap_arr : arr ) : arr ;      //æ“ä½œ5ï¼šé‚»åŸŸäº¤æ¢
 
 var
   i , t , p : Integer ;
@@ -9679,7 +9679,7 @@ begin
 
 end ;
 
-function hside_swap ( var hside_swap_arr : arr ) : arr ;          //²Ù×÷6£ºÇø¿éËÄµã½»»»
+function hside_swap ( var hside_swap_arr : arr ) : arr ;          //æ“ä½œ6ï¼šåŒºå—å››ç‚¹äº¤æ¢
 
 var
   divi : Double ;
@@ -9747,7 +9747,7 @@ begin
 
 end ;
 
-function inverse ( var inverse_arr : arr ) : arr ;              //²Ù×÷7£ºÇø¿é×ªÖÃ
+function inverse ( var inverse_arr : arr ) : arr ;              //æ“ä½œ7ï¼šåŒºå—è½¬ç½®
 
 var
   divi : Double ;
@@ -9812,7 +9812,7 @@ begin
 
 end ;
 
-function segment_swap ( var segment_arr : arr ) : arr ;               //²Ù×÷8£º²¿·Ö½»»»
+function segment_swap ( var segment_arr : arr ) : arr ;               //æ“ä½œ8ï¼šéƒ¨åˆ†äº¤æ¢
 
 var
   i , j , n , t : Integer ;
@@ -9867,11 +9867,11 @@ begin
 
     begin
 
-      evaluate_op [ j ] := pai0.pri_op [ j ] ;      //¼´½«ÒÔ³õÊ¼»¯Éú³ÉµÄ×îÓÅµÍ²ã¸öÌå×÷ÎªÆÀ¼Û±ê×¼½øĞĞ¸ß²ãÖÖÈºµÄÆÀ¼Û
+      evaluate_op [ j ] := pai0.pri_op [ j ] ;      //å³å°†ä»¥åˆå§‹åŒ–ç”Ÿæˆçš„æœ€ä¼˜ä½å±‚ä¸ªä½“ä½œä¸ºè¯„ä»·æ ‡å‡†è¿›è¡Œé«˜å±‚ç§ç¾¤çš„è¯„ä»·
 
     end;
 
-    for j := 1 to hls_length do                     //Ã¿Ò»¸ö²Ù×÷¦Ğ0½øĞĞÒ»´Î±ä»»
+    for j := 1 to hls_length do                     //æ¯ä¸€ä¸ªæ“ä½œÏ€0è¿›è¡Œä¸€æ¬¡å˜æ¢
 
     begin
 
@@ -9887,11 +9887,11 @@ begin
                                M_mt_arr1 , P_mt_arr1 ,
                                   o11_arr , m11_arr , pri_arr , fitness ) ;
 
-             for w := 1 to hls_length do                             //±äĞò12´ÎÍêÖ®ºóÈ¡×îÓÅ
+             for w := 1 to hls_length do                             //å˜åº12æ¬¡å®Œä¹‹åå–æœ€ä¼˜
 
              begin
 
-               test_hls_record [ j ].arr [ w ] := hl_evaluated_pop [ i ].arr [ w ] ; // test_hls_record{¸ß²ã²Ù×÷Ğò£»ÆÀ¼ÛÍêÖ®ºóµÄ¹¤ĞòÅÅĞò£»¸ß²ãÆÀ¼ÛÖµ}
+               test_hls_record [ j ].arr [ w ] := hl_evaluated_pop [ i ].arr [ w ] ; // test_hls_record{é«˜å±‚æ“ä½œåºï¼›è¯„ä»·å®Œä¹‹åçš„å·¥åºæ’åºï¼›é«˜å±‚è¯„ä»·å€¼}
 
              end ;
 
@@ -10121,7 +10121,7 @@ begin
 
     end;
 
-    for y := 2 to hls_length  do      //¡ı¡ı¡ı±ä»»Íê12´ÎÖ®ºóÕÒµ½ÆäÖĞ×îºÃµÄfitÀ´¼ÆËãÕâÒ»Ìõ¸ß²ã²Ù×÷ĞòÁĞµÄÆÀ¼ÛÖµ
+    for y := 2 to hls_length  do      //â†“â†“â†“å˜æ¢å®Œ12æ¬¡ä¹‹åæ‰¾åˆ°å…¶ä¸­æœ€å¥½çš„fitæ¥è®¡ç®—è¿™ä¸€æ¡é«˜å±‚æ“ä½œåºåˆ—çš„è¯„ä»·å€¼
 
     begin
 
@@ -10139,13 +10139,13 @@ begin
 
     end;
 
-    eva_agg [ i ] :=  test_hls_record [ 1 ].eva ;          //Áô×÷¸ø¸ß²ã¸öÌå¸½ÉÏÆÀ¼ÛÖµ
+    eva_agg [ i ] :=  test_hls_record [ 1 ].eva ;          //ç•™ä½œç»™é«˜å±‚ä¸ªä½“é™„ä¸Šè¯„ä»·å€¼
 
-    test_hls_store [ i ] := test_hls_record [ 1 ] ;        //Áô×÷Ñ¡³öÕâÒ»´ú×îÓÅop
+    test_hls_store [ i ] := test_hls_record [ 1 ] ;        //ç•™ä½œé€‰å‡ºè¿™ä¸€ä»£æœ€ä¼˜op
 
   end;
 
-   //Ñ¡³öÕâÒ»´ú×îÓÅĞòÁĞ¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı
+   //é€‰å‡ºè¿™ä¸€ä»£æœ€ä¼˜åºåˆ—â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“
 
   for y := 2 to hls_popsize  do
 
@@ -10251,11 +10251,11 @@ begin
 
     begin
 
-      evaluate_op [ j ] := pai0.pri_op [ j ] ;      //¼´½«ÒÔ³õÊ¼»¯Éú³ÉµÄ×îÓÅµÍ²ã¸öÌå×÷ÎªÆÀ¼Û±ê×¼½øĞĞ¸ß²ãÖÖÈºµÄÆÀ¼Û
+      evaluate_op [ j ] := pai0.pri_op [ j ] ;      //å³å°†ä»¥åˆå§‹åŒ–ç”Ÿæˆçš„æœ€ä¼˜ä½å±‚ä¸ªä½“ä½œä¸ºè¯„ä»·æ ‡å‡†è¿›è¡Œé«˜å±‚ç§ç¾¤çš„è¯„ä»·
 
     end;
 
-    for j := 1 to hls_length do                     //Ã¿Ò»¸ö²Ù×÷¦Ğ0½øĞĞÒ»´Î±ä»»
+    for j := 1 to hls_length do                     //æ¯ä¸€ä¸ªæ“ä½œÏ€0è¿›è¡Œä¸€æ¬¡å˜æ¢
 
     begin
 
@@ -10271,11 +10271,11 @@ begin
                                M_mt_arr1 , P_mt_arr1 ,
                                   o11_arr , m11_arr , pri_arr , fitness ) ;
 
-             for w := 1 to hls_length do                             //±äĞò12´ÎÍêÖ®ºóÈ¡×îÓÅ
+             for w := 1 to hls_length do                             //å˜åº12æ¬¡å®Œä¹‹åå–æœ€ä¼˜
 
              begin
 
-               test_hls_record [ j ].arr [ w ] := hl_evaluated_pop [ i ].arr [ w ] ; // test_hls_record{¸ß²ã²Ù×÷Ğò£»ÆÀ¼ÛÍêÖ®ºóµÄ¹¤ĞòÅÅĞò£»¸ß²ãÆÀ¼ÛÖµ}
+               test_hls_record [ j ].arr [ w ] := hl_evaluated_pop [ i ].arr [ w ] ; // test_hls_record{é«˜å±‚æ“ä½œåºï¼›è¯„ä»·å®Œä¹‹åçš„å·¥åºæ’åºï¼›é«˜å±‚è¯„ä»·å€¼}
 
              end ;
 
@@ -10505,7 +10505,7 @@ begin
 
     end;
 
-    for y := 2 to hls_length  do      //¡ı¡ı¡ı±ä»»Íê12´ÎÖ®ºóÕÒµ½ÆäÖĞ×îºÃµÄfitÀ´¼ÆËãÕâÒ»Ìõ¸ß²ã²Ù×÷ĞòÁĞµÄÆÀ¼ÛÖµ
+    for y := 2 to hls_length  do      //â†“â†“â†“å˜æ¢å®Œ12æ¬¡ä¹‹åæ‰¾åˆ°å…¶ä¸­æœ€å¥½çš„fitæ¥è®¡ç®—è¿™ä¸€æ¡é«˜å±‚æ“ä½œåºåˆ—çš„è¯„ä»·å€¼
 
     begin
 
@@ -10523,13 +10523,13 @@ begin
 
     end;
 
-    eva_agg [ i ] :=  test_hls_record [ 1 ].eva ;          //Áô×÷¸ø¸ß²ã¸öÌå¸½ÉÏÆÀ¼ÛÖµ
+    eva_agg [ i ] :=  test_hls_record [ 1 ].eva ;          //ç•™ä½œç»™é«˜å±‚ä¸ªä½“é™„ä¸Šè¯„ä»·å€¼
 
-    test_hls_store [ i ] := test_hls_record [ 1 ] ;        //Áô×÷Ñ¡³öÕâÒ»´ú×îÓÅop
+    test_hls_store [ i ] := test_hls_record [ 1 ] ;        //ç•™ä½œé€‰å‡ºè¿™ä¸€ä»£æœ€ä¼˜op
 
   end;
 
-   //Ñ¡³öÕâÒ»´ú×îÓÅĞòÁĞ¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı¡ı
+   //é€‰å‡ºè¿™ä¸€ä»£æœ€ä¼˜åºåˆ—â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“â†“
 
   for y := 2 to hls_popsize  do
 
@@ -10632,7 +10632,7 @@ var
   hl_record : hls_indiv ;
 
 begin
-  //////////ÒÔÏÂÊÇ³õÊ¼µÍ²ãÎÊÌâÓòÖÖÈº¡¢³õÊ¼×îºÃµÄ¸öÌåÉú³É////////////////////////
+  //////////ä»¥ä¸‹æ˜¯åˆå§‹ä½å±‚é—®é¢˜åŸŸç§ç¾¤ã€åˆå§‹æœ€å¥½çš„ä¸ªä½“ç”Ÿæˆ////////////////////////
   randomize ;
   pop_value := initially_generated_individuals ;
 
@@ -10723,7 +10723,7 @@ begin
 /////////////////////////////////////////
 
 
-  for i := 1 to pop_value - 1 do                         //initially_generated_individuals¸öËæ»úÉú³ÉµÄ¸öÌåÃ°ÅİÅÅĞò
+  for i := 1 to pop_value - 1 do                         //initially_generated_individualsä¸ªéšæœºç”Ÿæˆçš„ä¸ªä½“å†’æ³¡æ’åº
 
   begin
 
@@ -10762,11 +10762,11 @@ begin
   pai0.fitness := sbzm_pop [ 1 ].fitness ;
 
 
- //////////ÒÔÉÏÊÇ³õÊ¼µÍ²ãÎÊÌâÓò////////////////////////////////////
+ //////////ä»¥ä¸Šæ˜¯åˆå§‹ä½å±‚é—®é¢˜åŸŸ////////////////////////////////////
 
- //////////ÒÔÏÂÊÇ³õÊ¼¸ß²ã²ßÂÔÓò////////////////////////////////////
+ //////////ä»¥ä¸‹æ˜¯åˆå§‹é«˜å±‚ç­–ç•¥åŸŸ////////////////////////////////////
 
-  for i := 1 to hls_popsize do                                      //Ëæ»úÉú³É80¸ö¸ß²ã²ßÂÔÓò¸öÌåµÄĞòÁĞ
+  for i := 1 to hls_popsize do                                      //éšæœºç”Ÿæˆ80ä¸ªé«˜å±‚ç­–ç•¥åŸŸä¸ªä½“çš„åºåˆ—
 
   begin
 
@@ -10820,7 +10820,7 @@ begin
     end;
   end;
 
-  /////////////ÏÂÃæ¿ªÊ¼¶ÔËæ»úÉú³ÉµÄ¸ß²ã¸öÌå½øĞĞÆÀ¹ÀÖµ¼ÆËã²¢È¡ÓÅ/////////////////
+  /////////////ä¸‹é¢å¼€å§‹å¯¹éšæœºç”Ÿæˆçš„é«˜å±‚ä¸ªä½“è¿›è¡Œè¯„ä¼°å€¼è®¡ç®—å¹¶å–ä¼˜/////////////////
 
   hl_individual_evaluated_and_bestindiv_generated ( hls_pop ,  test1 , hand1 , accessory1 ,
                                                                                     source1_match ,
@@ -10835,7 +10835,7 @@ begin
 
   end;
 
-  for i := 1 to hls_popsize - 1 do                         //¸ß²ã¸öÌåÃ°ÅİÅÅĞò
+  for i := 1 to hls_popsize - 1 do                         //é«˜å±‚ä¸ªä½“å†’æ³¡æ’åº
 
   begin
 
@@ -10882,7 +10882,7 @@ var
   hl_record : hls_indiv ;
 
 begin
-  //////////ÒÔÏÂÊÇ³õÊ¼µÍ²ãÎÊÌâÓòÖÖÈº¡¢³õÊ¼×îºÃµÄ¸öÌåÉú³É////////////////////////
+  //////////ä»¥ä¸‹æ˜¯åˆå§‹ä½å±‚é—®é¢˜åŸŸç§ç¾¤ã€åˆå§‹æœ€å¥½çš„ä¸ªä½“ç”Ÿæˆ////////////////////////
   randomize ;
   pop_value := initially_generated_individuals ;
 
@@ -10973,7 +10973,7 @@ begin
 /////////////////////////////////////////
 
 
-  for i := 1 to pop_value - 1 do                         //initially_generated_individuals¸öËæ»úÉú³ÉµÄ¸öÌåÃ°ÅİÅÅĞò
+  for i := 1 to pop_value - 1 do                         //initially_generated_individualsä¸ªéšæœºç”Ÿæˆçš„ä¸ªä½“å†’æ³¡æ’åº
 
   begin
 
@@ -11012,11 +11012,11 @@ begin
   pai0.fitness := sbzm_pop [ 1 ].fitness ;
 
 
- //////////ÒÔÉÏÊÇ³õÊ¼µÍ²ãÎÊÌâÓò////////////////////////////////////
+ //////////ä»¥ä¸Šæ˜¯åˆå§‹ä½å±‚é—®é¢˜åŸŸ////////////////////////////////////
 
- //////////ÒÔÏÂÊÇ³õÊ¼¸ß²ã²ßÂÔÓò////////////////////////////////////
+ //////////ä»¥ä¸‹æ˜¯åˆå§‹é«˜å±‚ç­–ç•¥åŸŸ////////////////////////////////////
 
-  for i := 1 to hls_popsize do                                      //Ëæ»úÉú³É80¸ö¸ß²ã²ßÂÔÓò¸öÌåµÄĞòÁĞ
+  for i := 1 to hls_popsize do                                      //éšæœºç”Ÿæˆ80ä¸ªé«˜å±‚ç­–ç•¥åŸŸä¸ªä½“çš„åºåˆ—
 
   begin
 
@@ -11070,7 +11070,7 @@ begin
     end;
   end;
 
-  /////////////ÏÂÃæ¿ªÊ¼¶ÔËæ»úÉú³ÉµÄ¸ß²ã¸öÌå½øĞĞÆÀ¹ÀÖµ¼ÆËã²¢È¡ÓÅ/////////////////
+  /////////////ä¸‹é¢å¼€å§‹å¯¹éšæœºç”Ÿæˆçš„é«˜å±‚ä¸ªä½“è¿›è¡Œè¯„ä¼°å€¼è®¡ç®—å¹¶å–ä¼˜/////////////////
 
   hl_individual_evaluated_and_bestindiv_generated_compare ( hls_pop ,  test1 , hand1 , accessory1 ,
                                                                                     source1_match ,
@@ -11085,7 +11085,7 @@ begin
 
   end;
 
-  for i := 1 to hls_popsize - 1 do                         //¸ß²ã¸öÌåÃ°ÅİÅÅĞò
+  for i := 1 to hls_popsize - 1 do                         //é«˜å±‚ä¸ªä½“å†’æ³¡æ’åº
 
   begin
 
@@ -11111,7 +11111,7 @@ begin
 
 end ;
 
-procedure Initialize_PM_Matrix  ;           //³õÊ¼»¯¸ÅÂÊ¾ØÕó
+procedure Initialize_PM_Matrix  ;           //åˆå§‹åŒ–æ¦‚ç‡çŸ©é˜µ
 
 var
   i , j , k   : Integer ;
@@ -11136,7 +11136,7 @@ begin
 
         begin
 
-          Pro_model_MC [ k , i , j ] := 1 / ( MC_width_and_hight ) ;          //cube size£¨¸ß²ãĞòÁĞ³¤¶È£©¸ü¸ÄÊ±¼ÇµÃÔÚtypeÀïÃæ¸ü¸ÄÏàÓ¦³¤¶È
+          Pro_model_MC [ k , i , j ] := 1 / ( MC_width_and_hight ) ;          //cube sizeï¼ˆé«˜å±‚åºåˆ—é•¿åº¦ï¼‰æ›´æ”¹æ—¶è®°å¾—åœ¨typeé‡Œé¢æ›´æ”¹ç›¸åº”é•¿åº¦
 
         end;
 
@@ -11168,7 +11168,7 @@ begin
 
 end ;
 
-procedure Creating_MC_Matrix ;           //Éú³ÉÏàËÆ¿é¾ØÕó
+procedure Creating_MC_Matrix ;           //ç”Ÿæˆç›¸ä¼¼å—çŸ©é˜µ
 
 var
   i , j , k : Integer ;
@@ -11197,7 +11197,7 @@ begin
 
 end ;
 
-procedure creating_1st_PM_Matrix ;           //Éú³ÉµÚÒ»´ú¸ÅÂÊ¾ØÕó
+procedure creating_1st_PM_Matrix ;           //ç”Ÿæˆç¬¬ä¸€ä»£æ¦‚ç‡çŸ©é˜µ
 
 var
   i , j , k  : Integer ;
@@ -11290,7 +11290,7 @@ procedure Updating_HPOP_basedon_PMMC (  test1 , hand1 , accessory1 : arr ;
 var
   i , j , k , w : integer ;
   sum_p : real ;
-  //point_value : real ;                 //¸ÅÂÊÖ¸Õë
+  //point_value : real ;                 //æ¦‚ç‡æŒ‡é’ˆ
   sim_blc_psum_arr : psum_arr ;
   eva_agg : double_arr ;
   hl_record : hls_indiv ;
@@ -11299,23 +11299,23 @@ begin
 
   randomize ;
 
-  for i := 1 to hls_popsize do             //¿ªÊ¼Éú³ÉĞÂµÄ¸ß²ãÖÖÈº£¨i¸ö¸ß²ã¸öÌå£©
+  for i := 1 to hls_popsize do             //å¼€å§‹ç”Ÿæˆæ–°çš„é«˜å±‚ç§ç¾¤ï¼ˆiä¸ªé«˜å±‚ä¸ªä½“ï¼‰
 
   begin
 
-    for j := 1 to hls_length do            //j¸öÎ»ÖÃ
+    for j := 1 to hls_length do            //jä¸ªä½ç½®
 
     begin
 
-      if ( j = 1 ) then                    //µÚÒ»¸öÎ»ÖÃ
+      if ( j = 1 ) then                    //ç¬¬ä¸€ä¸ªä½ç½®
 
       begin
-        // ÏÈÉú³Époint valueºÍsim blc psum arr £¬È»ºó²ÉÑùÉú³ÉÏà¶ÔÓ¦Î»ÖÃµÄ¸ß²ã²Ù×÷
+        // å…ˆç”Ÿæˆpoint valueå’Œsim blc psum arr ï¼Œç„¶åé‡‡æ ·ç”Ÿæˆç›¸å¯¹åº”ä½ç½®çš„é«˜å±‚æ“ä½œ
         point_value := random ;
 
         sum_p := 0 ;
 
-        for k := 1 to MC_width_and_hight do        //sump×÷ÎªÑ¡¶¨µÚÒ»¸ö¸ß²ã²Ù×÷ĞòµÄ¸ÅÂÊÊıÉú³É·¶Î§
+        for k := 1 to MC_width_and_hight do        //sumpä½œä¸ºé€‰å®šç¬¬ä¸€ä¸ªé«˜å±‚æ“ä½œåºçš„æ¦‚ç‡æ•°ç”ŸæˆèŒƒå›´
 
         begin
 
@@ -11368,7 +11368,7 @@ begin
 
         end;
 
-        //µÚÒ»¸öÎ»ÖÃ´Ó1~8²Ù×÷Ñ¡Ò»¸öÉú³É   ¡ı¡ı¡ı¡ı
+        //ç¬¬ä¸€ä¸ªä½ç½®ä»1~8æ“ä½œé€‰ä¸€ä¸ªç”Ÿæˆ   â†“â†“â†“â†“
 
         if ( point_value >= 0 ) and ( point_value <= sim_blc_psum_arr [ 1 ] ) then
 
@@ -11443,14 +11443,14 @@ begin
 
       end
 
-      else               //²»ÊÇµÚÒ»¸öÎ»ÖÃ
+      else               //ä¸æ˜¯ç¬¬ä¸€ä¸ªä½ç½®
       begin
-        // ÏÈÉú³Époint valueºÍsim blc psum arr £¬È»ºó²ÉÑùÉú³ÉÏà¶ÔÓ¦Î»ÖÃµÄ¸ß²ã²Ù×÷
+        // å…ˆç”Ÿæˆpoint valueå’Œsim blc psum arr ï¼Œç„¶åé‡‡æ ·ç”Ÿæˆç›¸å¯¹åº”ä½ç½®çš„é«˜å±‚æ“ä½œ
         point_value := random ;
 
         sum_p := 0 ;
 
-        for w := 1 to MC_width_and_hight do        //sump×÷ÎªÑ¡¶¨¸ß²ã²Ù×÷ĞòµÄ¸ÅÂÊÊıÉú³É·¶Î§
+        for w := 1 to MC_width_and_hight do        //sumpä½œä¸ºé€‰å®šé«˜å±‚æ“ä½œåºçš„æ¦‚ç‡æ•°ç”ŸæˆèŒƒå›´
 
         begin
 
@@ -11491,7 +11491,7 @@ begin
 
         end;
 
-        //µÚÒ»¸öÎ»ÖÃ´Ó1~8²Ù×÷Ñ¡Ò»¸öÉú³É   ¡ı¡ı¡ı¡ı
+        //ç¬¬ä¸€ä¸ªä½ç½®ä»1~8æ“ä½œé€‰ä¸€ä¸ªç”Ÿæˆ   â†“â†“â†“â†“
 
         if ( point_value >= 0 ) and ( point_value <= sim_blc_psum_arr [ 1 ] ) then
 
@@ -11570,14 +11570,14 @@ begin
 
   end ;
 
-  /////////////ÏÂÃæ¿ªÊ¼¶Ô¸ß²ã¸öÌå½øĞĞÆÀ¹ÀÖµ¼ÆËã²¢È¡ÓÅ/////////////////
+  /////////////ä¸‹é¢å¼€å§‹å¯¹é«˜å±‚ä¸ªä½“è¿›è¡Œè¯„ä¼°å€¼è®¡ç®—å¹¶å–ä¼˜/////////////////
 
   hl_individual_evaluated_and_bestindiv_generated ( hls_contrast_pop , test1 , hand1 , accessory1 ,
                                                                                     source1_match ,
                                                                                       setup1_time ,
                                                                          M_mt_arr1 , P_mt_arr1 , eva_agg ) ;
 
-  for i := 1 to hls_popsize do                                 //  ¸³ÉÏÆÀ¹ÀÖµ
+  for i := 1 to hls_popsize do                                 //  èµ‹ä¸Šè¯„ä¼°å€¼
 
   begin
 
@@ -11585,7 +11585,7 @@ begin
 
   end;
 
-  for i := hls_popsize + 1 to hls_popsize + hls_length do     //¼ÓÉÏÄ¿Ç°×îÓÅµÄ¸ß²ã
+  for i := hls_popsize + 1 to hls_popsize + hls_length do     //åŠ ä¸Šç›®å‰æœ€ä¼˜çš„é«˜å±‚
 
   begin
 
@@ -11593,7 +11593,7 @@ begin
 
   end;
 
-  for i := 1 to hls_popsize + hls_length - 1 do                         //×ÜµÄ¸ß²ã¸öÌåÃ°ÅİÅÅĞò
+  for i := 1 to hls_popsize + hls_length - 1 do                         //æ€»çš„é«˜å±‚ä¸ªä½“å†’æ³¡æ’åº
 
   begin
 
@@ -11617,7 +11617,7 @@ begin
 
   end ;
 
-  for i := 1 to hls_length do                                     //È¡Ç°x¸ö±£´æÓÃ×÷Éú³ÉÏàËÆ¿é¾ØÕó
+  for i := 1 to hls_length do                                     //å–å‰xä¸ªä¿å­˜ç”¨ä½œç”Ÿæˆç›¸ä¼¼å—çŸ©é˜µ
 
   begin
 
@@ -11635,7 +11635,7 @@ procedure Updating_HPOP_basedon_PMMC_compare (  test1 , hand1 , accessory1 : arr
 var
   i , j , k , w : integer ;
   sum_p : real ;
-  //point_value : real ;                 //¸ÅÂÊÖ¸Õë
+  //point_value : real ;                 //æ¦‚ç‡æŒ‡é’ˆ
   sim_blc_psum_arr : psum_arr ;
   eva_agg : double_arr ;
   hl_record : hls_indiv ;
@@ -11644,23 +11644,23 @@ begin
 
   randomize ;
 
-  for i := 1 to hls_popsize do             //¿ªÊ¼Éú³ÉĞÂµÄ¸ß²ãÖÖÈº£¨i¸ö¸ß²ã¸öÌå£©
+  for i := 1 to hls_popsize do             //å¼€å§‹ç”Ÿæˆæ–°çš„é«˜å±‚ç§ç¾¤ï¼ˆiä¸ªé«˜å±‚ä¸ªä½“ï¼‰
 
   begin
 
-    for j := 1 to hls_length do            //j¸öÎ»ÖÃ
+    for j := 1 to hls_length do            //jä¸ªä½ç½®
 
     begin
 
-      if ( j = 1 ) then                    //µÚÒ»¸öÎ»ÖÃ
+      if ( j = 1 ) then                    //ç¬¬ä¸€ä¸ªä½ç½®
 
       begin
-        // ÏÈÉú³Époint valueºÍsim blc psum arr £¬È»ºó²ÉÑùÉú³ÉÏà¶ÔÓ¦Î»ÖÃµÄ¸ß²ã²Ù×÷
+        // å…ˆç”Ÿæˆpoint valueå’Œsim blc psum arr ï¼Œç„¶åé‡‡æ ·ç”Ÿæˆç›¸å¯¹åº”ä½ç½®çš„é«˜å±‚æ“ä½œ
         point_value := random ;
 
         sum_p := 0 ;
 
-        for k := 1 to MC_width_and_hight do        //sump×÷ÎªÑ¡¶¨µÚÒ»¸ö¸ß²ã²Ù×÷ĞòµÄ¸ÅÂÊÊıÉú³É·¶Î§
+        for k := 1 to MC_width_and_hight do        //sumpä½œä¸ºé€‰å®šç¬¬ä¸€ä¸ªé«˜å±‚æ“ä½œåºçš„æ¦‚ç‡æ•°ç”ŸæˆèŒƒå›´
 
         begin
 
@@ -11713,7 +11713,7 @@ begin
 
         end;
 
-        //µÚÒ»¸öÎ»ÖÃ´Ó1~8²Ù×÷Ñ¡Ò»¸öÉú³É   ¡ı¡ı¡ı¡ı
+        //ç¬¬ä¸€ä¸ªä½ç½®ä»1~8æ“ä½œé€‰ä¸€ä¸ªç”Ÿæˆ   â†“â†“â†“â†“
 
         if ( point_value >= 0 ) and ( point_value <= sim_blc_psum_arr [ 1 ] ) then
 
@@ -11788,14 +11788,14 @@ begin
 
       end
 
-      else               //²»ÊÇµÚÒ»¸öÎ»ÖÃ
+      else               //ä¸æ˜¯ç¬¬ä¸€ä¸ªä½ç½®
       begin
-        // ÏÈÉú³Époint valueºÍsim blc psum arr £¬È»ºó²ÉÑùÉú³ÉÏà¶ÔÓ¦Î»ÖÃµÄ¸ß²ã²Ù×÷
+        // å…ˆç”Ÿæˆpoint valueå’Œsim blc psum arr ï¼Œç„¶åé‡‡æ ·ç”Ÿæˆç›¸å¯¹åº”ä½ç½®çš„é«˜å±‚æ“ä½œ
         point_value := random ;
 
         sum_p := 0 ;
 
-        for w := 1 to MC_width_and_hight do        //sump×÷ÎªÑ¡¶¨¸ß²ã²Ù×÷ĞòµÄ¸ÅÂÊÊıÉú³É·¶Î§
+        for w := 1 to MC_width_and_hight do        //sumpä½œä¸ºé€‰å®šé«˜å±‚æ“ä½œåºçš„æ¦‚ç‡æ•°ç”ŸæˆèŒƒå›´
 
         begin
 
@@ -11836,7 +11836,7 @@ begin
 
         end;
 
-        //µÚÒ»¸öÎ»ÖÃ´Ó1~8²Ù×÷Ñ¡Ò»¸öÉú³É   ¡ı¡ı¡ı¡ı
+        //ç¬¬ä¸€ä¸ªä½ç½®ä»1~8æ“ä½œé€‰ä¸€ä¸ªç”Ÿæˆ   â†“â†“â†“â†“
 
         if ( point_value >= 0 ) and ( point_value <= sim_blc_psum_arr [ 1 ] ) then
 
@@ -11915,14 +11915,14 @@ begin
 
   end ;
 
-  /////////////ÏÂÃæ¿ªÊ¼¶Ô¸ß²ã¸öÌå½øĞĞÆÀ¹ÀÖµ¼ÆËã²¢È¡ÓÅ/////////////////
+  /////////////ä¸‹é¢å¼€å§‹å¯¹é«˜å±‚ä¸ªä½“è¿›è¡Œè¯„ä¼°å€¼è®¡ç®—å¹¶å–ä¼˜/////////////////
 
   hl_individual_evaluated_and_bestindiv_generated_compare ( hls_contrast_pop , test1 , hand1 , accessory1 ,
                                                                                     source1_match ,
                                                                                       setup1_time ,
                                                                          M_mt_arr1 , P_mt_arr1 , eva_agg ) ;
 
-  for i := 1 to hls_popsize do                                 //  ¸³ÉÏÆÀ¹ÀÖµ
+  for i := 1 to hls_popsize do                                 //  èµ‹ä¸Šè¯„ä¼°å€¼
 
   begin
 
@@ -11930,7 +11930,7 @@ begin
 
   end;
 
-  for i := hls_popsize + 1 to hls_popsize + hls_length do     //¼ÓÉÏÄ¿Ç°×îÓÅµÄ¸ß²ã
+  for i := hls_popsize + 1 to hls_popsize + hls_length do     //åŠ ä¸Šç›®å‰æœ€ä¼˜çš„é«˜å±‚
 
   begin
 
@@ -11938,7 +11938,7 @@ begin
 
   end;
 
-  for i := 1 to hls_popsize + hls_length - 1 do                         //×ÜµÄ¸ß²ã¸öÌåÃ°ÅİÅÅĞò
+  for i := 1 to hls_popsize + hls_length - 1 do                         //æ€»çš„é«˜å±‚ä¸ªä½“å†’æ³¡æ’åº
 
   begin
 
@@ -11962,7 +11962,7 @@ begin
 
   end ;
 
-  for i := 1 to hls_length do                                     //È¡Ç°x¸ö±£´æÓÃ×÷Éú³ÉÏàËÆ¿é¾ØÕó
+  for i := 1 to hls_length do                                     //å–å‰xä¸ªä¿å­˜ç”¨ä½œç”Ÿæˆç›¸ä¼¼å—çŸ©é˜µ
 
   begin
 
@@ -11999,12 +11999,12 @@ begin
 
     litera_num := 1 ;
 
-    Initialize_pop ( o1_arr , test1 , hand1 , accessory1 ,        //¹¤Ğò£»ÈıÖÖ×ÊÔ´ÊıÄ¿
-                                           source1_match ,        //»úÆ÷ÏàÆ¥Åä×ÊÔ´ÖÖÀà
-                                             setup1_time ,        //»úÆ÷¼äÉèÖÃÊ±¼ä
-                                 M_mt_arr1 , P_mt_arr1 ) ;        //»úÆ÷ºÍ¼Ó¹¤Ê±¼ä¾ØÕó
+    Initialize_pop ( o1_arr , test1 , hand1 , accessory1 ,        //å·¥åºï¼›ä¸‰ç§èµ„æºæ•°ç›®
+                                           source1_match ,        //æœºå™¨ç›¸åŒ¹é…èµ„æºç§ç±»
+                                             setup1_time ,        //æœºå™¨é—´è®¾ç½®æ—¶é—´
+                                 M_mt_arr1 , P_mt_arr1 ) ;        //æœºå™¨å’ŒåŠ å·¥æ—¶é—´çŸ©é˜µ
 
-    Initialize_PM_Matrix ;                       //³õÊ¼»¯ÈıÎ¬¸ÅÂÊ¾ØÕó
+    Initialize_PM_Matrix ;                       //åˆå§‹åŒ–ä¸‰ç»´æ¦‚ç‡çŸ©é˜µ
 
     repeat
 
@@ -12022,11 +12022,11 @@ begin
       if ( litera_num = 2 ) then
       begin
 
-        Creating_MC_Matrix ;                         //¸ù¾İÉÏÒ»´úÖÖÈºÉú³ÉÈıÎ¬ÏàËÆ¿é¾ØÕó
+        Creating_MC_Matrix ;                         //æ ¹æ®ä¸Šä¸€ä»£ç§ç¾¤ç”Ÿæˆä¸‰ç»´ç›¸ä¼¼å—çŸ©é˜µ
 
-        creating_1st_PM_Matrix ;                     //Éú³ÉµÚÒ»´úÈıÎ¬¸ÅÂÊ¾ØÕó
+        creating_1st_PM_Matrix ;                     //ç”Ÿæˆç¬¬ä¸€ä»£ä¸‰ç»´æ¦‚ç‡çŸ©é˜µ
 
-        Updating_HPOP_basedon_PMMC (  test1 , hand1 , accessory1 ,        //¸ù¾İ¸ÅÂÊ¾ØÕóÉú³ÉÏÂÒ»´ú¸ß²ãÖÖÈº
+        Updating_HPOP_basedon_PMMC (  test1 , hand1 , accessory1 ,        //æ ¹æ®æ¦‚ç‡çŸ©é˜µç”Ÿæˆä¸‹ä¸€ä»£é«˜å±‚ç§ç¾¤
                                                source1_match ,
                                                  setup1_time ,
                                      M_mt_arr1 , P_mt_arr1 ) ;
@@ -12048,11 +12048,11 @@ begin
       else
       begin
 
-        Creating_MC_Matrix ;                         //¸ù¾İÉÏÒ»´úÖÖÈºÉú³ÉÈıÎ¬ÏàËÆ¿é¾ØÕó
+        Creating_MC_Matrix ;                         //æ ¹æ®ä¸Šä¸€ä»£ç§ç¾¤ç”Ÿæˆä¸‰ç»´ç›¸ä¼¼å—çŸ©é˜µ
 
-        creating_subs_PM_Matrix ;                     //Éú³ÉºóĞøÈıÎ¬¸ÅÂÊ¾ØÕó
+        creating_subs_PM_Matrix ;                     //ç”Ÿæˆåç»­ä¸‰ç»´æ¦‚ç‡çŸ©é˜µ
 
-        Updating_HPOP_basedon_PMMC (  test1 , hand1 , accessory1 ,        //¸ù¾İ¸ÅÂÊ¾ØÕóÉú³ÉÏÂÒ»´ú¸ß²ãÖÖÈº
+        Updating_HPOP_basedon_PMMC (  test1 , hand1 , accessory1 ,        //æ ¹æ®æ¦‚ç‡çŸ©é˜µç”Ÿæˆä¸‹ä¸€ä»£é«˜å±‚ç§ç¾¤
                                                source1_match ,
                                                  setup1_time ,
                                      M_mt_arr1 , P_mt_arr1 ) ;
@@ -12143,12 +12143,12 @@ begin
 
     litera_num := 1 ;
 
-    Initialize_pop_compare ( o1_arr , test1 , hand1 , accessory1 ,        //¹¤Ğò£»ÈıÖÖ×ÊÔ´ÊıÄ¿
-                                           source1_match ,        //»úÆ÷ÏàÆ¥Åä×ÊÔ´ÖÖÀà
-                                             setup1_time ,        //»úÆ÷¼äÉèÖÃÊ±¼ä
-                                 M_mt_arr1 , P_mt_arr1 ) ;        //»úÆ÷ºÍ¼Ó¹¤Ê±¼ä¾ØÕó
+    Initialize_pop_compare ( o1_arr , test1 , hand1 , accessory1 ,        //å·¥åºï¼›ä¸‰ç§èµ„æºæ•°ç›®
+                                           source1_match ,        //æœºå™¨ç›¸åŒ¹é…èµ„æºç§ç±»
+                                             setup1_time ,        //æœºå™¨é—´è®¾ç½®æ—¶é—´
+                                 M_mt_arr1 , P_mt_arr1 ) ;        //æœºå™¨å’ŒåŠ å·¥æ—¶é—´çŸ©é˜µ
 
-    Initialize_PM_Matrix ;                       //³õÊ¼»¯ÈıÎ¬¸ÅÂÊ¾ØÕó
+    Initialize_PM_Matrix ;                       //åˆå§‹åŒ–ä¸‰ç»´æ¦‚ç‡çŸ©é˜µ
 
     repeat
 
@@ -12166,11 +12166,11 @@ begin
       if ( litera_num = 2 ) then
       begin
 
-        Creating_MC_Matrix ;                         //¸ù¾İÉÏÒ»´úÖÖÈºÉú³ÉÈıÎ¬ÏàËÆ¿é¾ØÕó
+        Creating_MC_Matrix ;                         //æ ¹æ®ä¸Šä¸€ä»£ç§ç¾¤ç”Ÿæˆä¸‰ç»´ç›¸ä¼¼å—çŸ©é˜µ
 
-        creating_1st_PM_Matrix ;                     //Éú³ÉµÚÒ»´úÈıÎ¬¸ÅÂÊ¾ØÕó
+        creating_1st_PM_Matrix ;                     //ç”Ÿæˆç¬¬ä¸€ä»£ä¸‰ç»´æ¦‚ç‡çŸ©é˜µ
 
-        Updating_HPOP_basedon_PMMC_compare (  test1 , hand1 , accessory1 ,        //¸ù¾İ¸ÅÂÊ¾ØÕóÉú³ÉÏÂÒ»´ú¸ß²ãÖÖÈº
+        Updating_HPOP_basedon_PMMC_compare (  test1 , hand1 , accessory1 ,        //æ ¹æ®æ¦‚ç‡çŸ©é˜µç”Ÿæˆä¸‹ä¸€ä»£é«˜å±‚ç§ç¾¤
                                                source1_match ,
                                                  setup1_time ,
                                      M_mt_arr1 , P_mt_arr1 ) ;
@@ -12192,11 +12192,11 @@ begin
       else
       begin
 
-        Creating_MC_Matrix ;                         //¸ù¾İÉÏÒ»´úÖÖÈºÉú³ÉÈıÎ¬ÏàËÆ¿é¾ØÕó
+        Creating_MC_Matrix ;                         //æ ¹æ®ä¸Šä¸€ä»£ç§ç¾¤ç”Ÿæˆä¸‰ç»´ç›¸ä¼¼å—çŸ©é˜µ
 
-        creating_subs_PM_Matrix ;                     //Éú³ÉºóĞøÈıÎ¬¸ÅÂÊ¾ØÕó
+        creating_subs_PM_Matrix ;                     //ç”Ÿæˆåç»­ä¸‰ç»´æ¦‚ç‡çŸ©é˜µ
 
-        Updating_HPOP_basedon_PMMC_compare (  test1 , hand1 , accessory1 ,        //¸ù¾İ¸ÅÂÊ¾ØÕóÉú³ÉÏÂÒ»´ú¸ß²ãÖÖÈº
+        Updating_HPOP_basedon_PMMC_compare (  test1 , hand1 , accessory1 ,        //æ ¹æ®æ¦‚ç‡çŸ©é˜µç”Ÿæˆä¸‹ä¸€ä»£é«˜å±‚ç§ç¾¤
                                                source1_match ,
                                                  setup1_time ,
                                      M_mt_arr1 , P_mt_arr1 ) ;
@@ -12291,12 +12291,12 @@ begin
 
     litera_num := 1 ;
 
-    Initialize_pop_compare ( o1_arr , test1 , hand1 , accessory1 ,        //¹¤Ğò£»ÈıÖÖ×ÊÔ´ÊıÄ¿
-                                           source1_match ,        //»úÆ÷ÏàÆ¥Åä×ÊÔ´ÖÖÀà
-                                             setup1_time ,        //»úÆ÷¼äÉèÖÃÊ±¼ä
-                                 M_mt_arr1 , P_mt_arr1 ) ;        //»úÆ÷ºÍ¼Ó¹¤Ê±¼ä¾ØÕó
+    Initialize_pop_compare ( o1_arr , test1 , hand1 , accessory1 ,        //å·¥åºï¼›ä¸‰ç§èµ„æºæ•°ç›®
+                                           source1_match ,        //æœºå™¨ç›¸åŒ¹é…èµ„æºç§ç±»
+                                             setup1_time ,        //æœºå™¨é—´è®¾ç½®æ—¶é—´
+                                 M_mt_arr1 , P_mt_arr1 ) ;        //æœºå™¨å’ŒåŠ å·¥æ—¶é—´çŸ©é˜µ
 
-    Initialize_PM_Matrix ;                       //³õÊ¼»¯ÈıÎ¬¸ÅÂÊ¾ØÕó
+    Initialize_PM_Matrix ;                       //åˆå§‹åŒ–ä¸‰ç»´æ¦‚ç‡çŸ©é˜µ
 
     repeat
 
@@ -12314,11 +12314,11 @@ begin
       if ( litera_num = 2 ) then
       begin
 
-        Creating_MC_Matrix ;                         //¸ù¾İÉÏÒ»´úÖÖÈºÉú³ÉÈıÎ¬ÏàËÆ¿é¾ØÕó
+        Creating_MC_Matrix ;                         //æ ¹æ®ä¸Šä¸€ä»£ç§ç¾¤ç”Ÿæˆä¸‰ç»´ç›¸ä¼¼å—çŸ©é˜µ
 
-        creating_1st_PM_Matrix ;                     //Éú³ÉµÚÒ»´úÈıÎ¬¸ÅÂÊ¾ØÕó
+        creating_1st_PM_Matrix ;                     //ç”Ÿæˆç¬¬ä¸€ä»£ä¸‰ç»´æ¦‚ç‡çŸ©é˜µ
 
-        Updating_HPOP_basedon_PMMC_compare (  test1 , hand1 , accessory1 ,        //¸ù¾İ¸ÅÂÊ¾ØÕóÉú³ÉÏÂÒ»´ú¸ß²ãÖÖÈº
+        Updating_HPOP_basedon_PMMC_compare (  test1 , hand1 , accessory1 ,        //æ ¹æ®æ¦‚ç‡çŸ©é˜µç”Ÿæˆä¸‹ä¸€ä»£é«˜å±‚ç§ç¾¤
                                                source1_match ,
                                                  setup1_time ,
                                      M_mt_arr1 , P_mt_arr1 ) ;
@@ -12340,11 +12340,11 @@ begin
       else
       begin
 
-        Creating_MC_Matrix ;                         //¸ù¾İÉÏÒ»´úÖÖÈºÉú³ÉÈıÎ¬ÏàËÆ¿é¾ØÕó
+        Creating_MC_Matrix ;                         //æ ¹æ®ä¸Šä¸€ä»£ç§ç¾¤ç”Ÿæˆä¸‰ç»´ç›¸ä¼¼å—çŸ©é˜µ
 
-        creating_subs_PM_Matrix ;                     //Éú³ÉºóĞøÈıÎ¬¸ÅÂÊ¾ØÕó
+        creating_subs_PM_Matrix ;                     //ç”Ÿæˆåç»­ä¸‰ç»´æ¦‚ç‡çŸ©é˜µ
 
-        Updating_HPOP_basedon_PMMC_compare (  test1 , hand1 , accessory1 ,        //¸ù¾İ¸ÅÂÊ¾ØÕóÉú³ÉÏÂÒ»´ú¸ß²ãÖÖÈº
+        Updating_HPOP_basedon_PMMC_compare (  test1 , hand1 , accessory1 ,        //æ ¹æ®æ¦‚ç‡çŸ©é˜µç”Ÿæˆä¸‹ä¸€ä»£é«˜å±‚ç§ç¾¤
                                                source1_match ,
                                                  setup1_time ,
                                      M_mt_arr1 , P_mt_arr1 ) ;
@@ -12413,7 +12413,7 @@ begin
 
 end ;
 
-procedure Initialize_EDA_MC  ;           //³õÊ¼»¯EDA²ÉÑù¾ØÕó
+procedure Initialize_EDA_MC  ;           //åˆå§‹åŒ–EDAé‡‡æ ·çŸ©é˜µ
 
 var
   i , j : Integer ;
@@ -12438,7 +12438,7 @@ begin
 
 end ;
 
-procedure Updeating_EDA_MC  ;           ////¸üĞÂEDA²ÉÑù¾ØÕó
+procedure Updeating_EDA_MC  ;           ////æ›´æ–°EDAé‡‡æ ·çŸ©é˜µ
 
 var
   i , j : Integer ;
@@ -12472,7 +12472,7 @@ procedure Updating_HPOP_basedon_EDAMC (  test1 , hand1 , accessory1 : arr ;
 var
   i , j , k , w : integer ;
   sum_p : real ;
-  //point_value : real ;                 //¸ÅÂÊÖ¸Õë
+  //point_value : real ;                 //æ¦‚ç‡æŒ‡é’ˆ
   sim_blc_psum_arr : psum_arr ;
   eva_agg : double_arr ;
   hl_record : hls_indiv ;
@@ -12481,21 +12481,21 @@ begin
 
   randomize ;
 
-  for i := 1 to hls_popsize do             //¿ªÊ¼Éú³ÉĞÂµÄ¸ß²ãÖÖÈº£¨i¸ö¸ß²ã¸öÌå£©
+  for i := 1 to hls_popsize do             //å¼€å§‹ç”Ÿæˆæ–°çš„é«˜å±‚ç§ç¾¤ï¼ˆiä¸ªé«˜å±‚ä¸ªä½“ï¼‰
 
   begin
 
-    for j := 1 to hls_length do            //j¸öÎ»ÖÃ
+    for j := 1 to hls_length do            //jä¸ªä½ç½®
 
     begin
 
 
-        // ÏÈÉú³Époint valueºÍsim blc psum arr £¬È»ºó²ÉÑùÉú³ÉÏà¶ÔÓ¦Î»ÖÃµÄ¸ß²ã²Ù×÷
+        // å…ˆç”Ÿæˆpoint valueå’Œsim blc psum arr ï¼Œç„¶åé‡‡æ ·ç”Ÿæˆç›¸å¯¹åº”ä½ç½®çš„é«˜å±‚æ“ä½œ
         point_value := random ;
 
         sum_p := 0 ;
 
-        for k := 1 to MC_width_and_hight do        //sump×÷ÎªÑ¡¶¨µÚÒ»¸ö¸ß²ã²Ù×÷ĞòµÄ¸ÅÂÊÊıÉú³É·¶Î§
+        for k := 1 to MC_width_and_hight do        //sumpä½œä¸ºé€‰å®šç¬¬ä¸€ä¸ªé«˜å±‚æ“ä½œåºçš„æ¦‚ç‡æ•°ç”ŸæˆèŒƒå›´
 
         begin
 
@@ -12542,7 +12542,7 @@ begin
 
         end;
 
-        //µÚÒ»¸öÎ»ÖÃ´Ó1~8²Ù×÷Ñ¡Ò»¸öÉú³É   ¡ı¡ı¡ı¡ı
+        //ç¬¬ä¸€ä¸ªä½ç½®ä»1~8æ“ä½œé€‰ä¸€ä¸ªç”Ÿæˆ   â†“â†“â†“â†“
 
         if ( point_value >= 0 ) and ( point_value <= sim_blc_psum_arr [ 1 ] ) then
 
@@ -12623,14 +12623,14 @@ begin
 
   end ;
 
-  /////////////ÏÂÃæ¿ªÊ¼¶Ô¸ß²ã¸öÌå½øĞĞÆÀ¹ÀÖµ¼ÆËã²¢È¡ÓÅ/////////////////
+  /////////////ä¸‹é¢å¼€å§‹å¯¹é«˜å±‚ä¸ªä½“è¿›è¡Œè¯„ä¼°å€¼è®¡ç®—å¹¶å–ä¼˜/////////////////
 
   hl_individual_evaluated_and_bestindiv_generated ( hls_contrast_pop , test1 , hand1 , accessory1 ,
                                                                                     source1_match ,
                                                                                       setup1_time ,
                                                                          M_mt_arr1 , P_mt_arr1 , eva_agg ) ;
 
-  for i := 1 to hls_popsize do                                 //  ¸³ÉÏÆÀ¹ÀÖµ
+  for i := 1 to hls_popsize do                                 //  èµ‹ä¸Šè¯„ä¼°å€¼
 
   begin
 
@@ -12638,7 +12638,7 @@ begin
 
   end;
 
-  for i := hls_popsize + 1 to hls_popsize + hls_length do     //¼ÓÉÏÄ¿Ç°×îÓÅµÄ¸ß²ã
+  for i := hls_popsize + 1 to hls_popsize + hls_length do     //åŠ ä¸Šç›®å‰æœ€ä¼˜çš„é«˜å±‚
 
   begin
 
@@ -12646,7 +12646,7 @@ begin
 
   end;
 
-  for i := 1 to hls_popsize + hls_length - 1 do                         //×ÜµÄ¸ß²ã¸öÌåÃ°ÅİÅÅĞò
+  for i := 1 to hls_popsize + hls_length - 1 do                         //æ€»çš„é«˜å±‚ä¸ªä½“å†’æ³¡æ’åº
 
   begin
 
@@ -12670,7 +12670,7 @@ begin
 
   end ;
 
-  for i := 1 to hls_length do                                     //È¡Ç°x¸ö±£´æÓÃ×÷Éú³ÉÏàËÆ¿é¾ØÕó
+  for i := 1 to hls_length do                                     //å–å‰xä¸ªä¿å­˜ç”¨ä½œç”Ÿæˆç›¸ä¼¼å—çŸ©é˜µ
 
   begin
 
@@ -12696,10 +12696,10 @@ begin
 
   litera_num := 1 ;
 
-  Initialize_pop ( o1_arr , test1 , hand1 , accessory1 ,        //¹¤Ğò£»ÈıÖÖ×ÊÔ´ÊıÄ¿
-                                         source1_match ,        //»úÆ÷ÏàÆ¥Åä×ÊÔ´ÖÖÀà
-                                           setup1_time ,        //»úÆ÷¼äÉèÖÃÊ±¼ä
-                               M_mt_arr1 , P_mt_arr1 ) ;        //»úÆ÷ºÍ¼Ó¹¤Ê±¼ä¾ØÕó
+  Initialize_pop ( o1_arr , test1 , hand1 , accessory1 ,        //å·¥åºï¼›ä¸‰ç§èµ„æºæ•°ç›®
+                                         source1_match ,        //æœºå™¨ç›¸åŒ¹é…èµ„æºç§ç±»
+                                           setup1_time ,        //æœºå™¨é—´è®¾ç½®æ—¶é—´
+                               M_mt_arr1 , P_mt_arr1 ) ;        //æœºå™¨å’ŒåŠ å·¥æ—¶é—´çŸ©é˜µ
 
   repeat
 
@@ -12716,11 +12716,11 @@ begin
     else
     begin
 
-      Creating_MC_Matrix ;                         //¸ù¾İÉÏÒ»´úÖÖÈºÉú³ÉÈıÎ¬ÏàËÆ¿é¾ØÕó
+      Creating_MC_Matrix ;                         //æ ¹æ®ä¸Šä¸€ä»£ç§ç¾¤ç”Ÿæˆä¸‰ç»´ç›¸ä¼¼å—çŸ©é˜µ
 
-      creating_subs_PM_Matrix ;                     //Éú³ÉºóĞøÈıÎ¬¸ÅÂÊ¾ØÕó
+      creating_subs_PM_Matrix ;                     //ç”Ÿæˆåç»­ä¸‰ç»´æ¦‚ç‡çŸ©é˜µ
 
-      Updating_HPOP_basedon_EDAMC (  test1 , hand1 , accessory1 ,        //¸ù¾İ¸ÅÂÊ¾ØÕóÉú³ÉÏÂÒ»´ú¸ß²ãÖÖÈº
+      Updating_HPOP_basedon_EDAMC (  test1 , hand1 , accessory1 ,        //æ ¹æ®æ¦‚ç‡çŸ©é˜µç”Ÿæˆä¸‹ä¸€ä»£é«˜å±‚ç§ç¾¤
                                              source1_match ,
                                                setup1_time ,
                                    M_mt_arr1 , P_mt_arr1 ) ;
@@ -13292,12 +13292,12 @@ begin
 
   QHH_discount := 0.4 ;
 
-  Initialize_pop ( o1_arr , test1 , hand1 , accessory1 ,        //¹¤Ğò£»ÈıÖÖ×ÊÔ´ÊıÄ¿
-                                         source1_match ,        //»úÆ÷ÏàÆ¥Åä×ÊÔ´ÖÖÀà
-                                           setup1_time ,        //»úÆ÷¼äÉèÖÃÊ±¼ä
-                               M_mt_arr1 , P_mt_arr1 ) ;        //»úÆ÷ºÍ¼Ó¹¤Ê±¼ä¾ØÕó
+  Initialize_pop ( o1_arr , test1 , hand1 , accessory1 ,        //å·¥åºï¼›ä¸‰ç§èµ„æºæ•°ç›®
+                                         source1_match ,        //æœºå™¨ç›¸åŒ¹é…èµ„æºç§ç±»
+                                           setup1_time ,        //æœºå™¨é—´è®¾ç½®æ—¶é—´
+                               M_mt_arr1 , P_mt_arr1 ) ;        //æœºå™¨å’ŒåŠ å·¥æ—¶é—´çŸ©é˜µ
 
-  for i := 1 to max_i do                            //³õÊ¼»¯¦Ğb
+  for i := 1 to max_i do                            //åˆå§‹åŒ–Ï€b
 
   begin
 
@@ -13311,11 +13311,11 @@ begin
 
   pai_b.fitness := pai0.fitness ;
 
-  QHH_pt := 1  ;                                   //³õÊ¼»¯pt
+  QHH_pt := 1  ;                                   //åˆå§‹åŒ–pt
 
-  QHH_state_choose ;                              //³õÊ¼»¯×´Ì¬                 {µ÷ÓÃº¯Êı}
+  QHH_state_choose ;                              //åˆå§‹åŒ–çŠ¶æ€                 {è°ƒç”¨å‡½æ•°}
 
-  for i := 1 to 3 do                               //³õÊ¼»¯q±í
+  for i := 1 to 3 do                               //åˆå§‹åŒ–qè¡¨
 
   begin
 
@@ -13337,7 +13337,7 @@ begin
 
     QHH_greedy := 1 - ( QHH_gcur / QHH_G ) ;
 
-    QHH_action_choose ;                                                         {µ÷ÓÃº¯Êı}
+    QHH_action_choose ;                                                         {è°ƒç”¨å‡½æ•°}
 
     QHH_C_init := pai_b.fitness ;
 
@@ -13346,7 +13346,7 @@ begin
       QHH_perform_action_to_paib ( test1 , hand1 , accessory1 ,
                                   source1_match ,
                                     setup1_time ,
-                       M_mt_arr1 , P_mt_arr1  );                                              {µ÷ÓÃº¯Êı}
+                       M_mt_arr1 , P_mt_arr1  );                                              {è°ƒç”¨å‡½æ•°}
 
       QHH_E := QHH_E + 1 ;
 
@@ -13356,15 +13356,15 @@ begin
 
     QHH_pt := QHH_C_init/QHH_C_EP ;
 
-    QHH_state_choose ;                                                          {µ÷ÓÃº¯Êı}
+    QHH_state_choose ;                                                          {è°ƒç”¨å‡½æ•°}
 
-    QHH_rein_sig_obtian ;                                                       {µ÷ÓÃº¯Êı }
+    QHH_rein_sig_obtian ;                                                       {è°ƒç”¨å‡½æ•° }
 
-    QHH_argmax_v_calculate ;                                                    {µ÷ÓÃº¯Êı }
+    QHH_argmax_v_calculate ;                                                    {è°ƒç”¨å‡½æ•° }
 
     QHH_learn_rate := 1 - ( ( 0.9*QHH_Gcur )/QHH_G ) ;
 
-    QHH_qtable_updeated ;                                                       {µ÷ÓÃº¯Êı }
+    QHH_qtable_updeated ;                                                       {è°ƒç”¨å‡½æ•° }
 
     best_fitness_arr [ QHH_Gcur ] := pai_b.fitness ;
 
